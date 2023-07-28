@@ -34,14 +34,23 @@ public class TouristDestinationSAXHandler extends DefaultHandler {
 		if (qName.equals("record")) {
 			// complete code #04
 			// tripDto 객체를 생성(이미지 정보 세팅)하고 trips List에 추가하세요.
+			String[] imgList = {
+					"image01.jpg", "image02.jpg", "image03.jpg", "image04.jpg",
+					"image05.jpg", "image06.jpg", "image07.jpg", "image08.jpg",
+					"image09.jpg", "image10.jpg", "image11.jpg"
+			};
+
+			tripDto = new TripDto(num++);
+			int num = (int) (Math.random()*10)+1;
+			tripDto.setImg(imgList[num]);
+			trips.add(tripDto);
 		}
 	}
 
 	@Override
 	public void endElement(String uri, String localName, String qName) {
 		if (qName.equals("관광지명")) {
-			// complete code #05
-			// 관광지명 항목을 처리하세요.
+			tripDto.setTouristDestination(temp);
 		} else if (qName.equals("소재지도로명주소")) {
 			tripDto.setStreetAddress(temp);
 		} else if (qName.equals("소재지지번주소")) {
@@ -50,13 +59,12 @@ public class TouristDestinationSAXHandler extends DefaultHandler {
 			if (temp.length() != 0)
 				tripDto.setLat(Double.parseDouble(temp));
 		} else if (qName.equals("경도")) {
-			// complete code #06
-			// 경도 항목을 처리하세요.
+			if (temp.length() != 0)
+				tripDto.setLng(Double.parseDouble(temp));
 		} else if (qName.equals("관광지소개")) {
 			tripDto.setInfo(temp);
 		} else if (qName.equals("관리기관전화번호")) {
-			// complete code #07
-			// 관리기관전화번호 항목을 처리하세요.
+			tripDto.setTel(temp);
 		}
 	}
 
