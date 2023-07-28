@@ -189,15 +189,15 @@ public class TripInfoView {
 		// 아래의 코드를 참조하여 아래 라인을 uncomment 하고 searchBt.addActionList() 를 Lambda 표현식으로 바꾸세요.
 		searchBt.addActionListener((e)->searchTrips());
 
-		// 참조코드 시작 - 위 코드를 완성 후 삭제 또는 comment 처리하세요.
-		ActionListener buttonHandler = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				searchTrips();
-			}
-		};
-		
-		searchBt.addActionListener( buttonHandler );
+//		// 참조코드 시작 - 위 코드를 완성 후 삭제 또는 comment 처리하세요.
+//		ActionListener buttonHandler = new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				searchTrips();
+//			}
+//		};
+//		
+//		searchBt.addActionListener( buttonHandler );
 		// 참조코드 종료
 
 		showTrips();
