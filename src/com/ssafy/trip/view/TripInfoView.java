@@ -60,12 +60,6 @@ public class TripInfoView {
 
 	/** 화면에 표시하고 있는 주택 */
 	private TripDto curTrip;
-	
-	/** 화면에 표시하고 있는 주택 */
-	private DefaultTableModel festivalModel;
-	private JTable festivalTable;
-	private JScrollPane festivalPan;
-	private String[] festivalTitle = { "번호", "광역단체명", "기초단체명", "축제명", "축제유형", "개최기간" };
 
 	public TripInfoView() {
 		/* Service들 생성 */
@@ -81,7 +75,7 @@ public class TripInfoView {
 
 		setMain();
 
-		frame.setSize(1300, 900);
+		frame.setSize(1200, 800);
 		frame.setResizable(true);
 		frame.setVisible(true);
 		showTripInfo(0);
@@ -125,7 +119,7 @@ public class TripInfoView {
 		/* 왼쪽 화면을 위한 설정 */
 		JPanel left = new JPanel(new BorderLayout());
 		JPanel leftCenter = new JPanel(new BorderLayout(0, 10));
-		JPanel leftR = new JPanel(new GridLayout(10, 3));
+		JPanel leftR = new JPanel(new GridLayout(10, 2));
 		leftR.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
 
 		String[] info = { "", "", "관광지명", "도로명주소", "지번주소", "위도", "경도", "전화번호", "관광지정보", "" };
@@ -169,17 +163,16 @@ public class TripInfoView {
 		tripTable = new JTable(tripModel);
 		tripPan = new JScrollPane(tripTable);
 		tripTable.setColumnSelectionAllowed(true);
-		rightCenter.add(new JLabel("관광지 정보", JLabel.CENTER), "North");
+		rightCenter.add(new JLabel("광광지 정보", JLabel.CENTER), "North");
 		rightCenter.add(tripPan, "Center");
 
 		right.add(rightTop, "North");
 		right.add(rightCenter, "Center");
 
-		JPanel mainP = new JPanel(new GridLayout(1, 3));
+		JPanel mainP = new JPanel(new GridLayout(1, 2));
 
 		mainP.add(left);
 		mainP.add(right);
-		mainP.add(showFestival());
 
 		mainP.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
 		frame.add(mainP, "Center");
@@ -248,29 +241,6 @@ public class TripInfoView {
 			tripModel.setDataVector(data, title);
 		}
 	}
-	
-	
-	public JPanel showFestival() {
-		
-		JPanel festivalView = new JPanel(new BorderLayout());
-
-		
-		festivalView.add(new JLabel("지역축제 정보", JLabel.CENTER), "North");
-		String[][] data = {{"dd","dd","Dd","dd","dd","Dd"},
-				{"dd","dd","Dd","dd","dd","Dd"},
-				{"dd","dd","Dd","dd","dd","Dd"},
-				{"dd","dd","Dd","dd","dd","Dd"},
-				{"dd","dd","Dd","dd","dd","Dd"},
-				{"dd","dd","Dd","dd","dd","Dd"}};
-		
-		JTable table=new JTable(data, festivalTitle);
-		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		JScrollPane scrolledTable=new JScrollPane(table);	//스크롤 될 수 있도록 JScrollPane 적용
-		scrolledTable.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));	//너무 붙어있어서 가장자리 띄움(padding)
-		festivalView.add("Center",scrolledTable);	//가운데에 JTable 추가
-		
-		return festivalView;
-		}
 
 //	public static void main(String[] args) {
 //		new TripInfoView();
