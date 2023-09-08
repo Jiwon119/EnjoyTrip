@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
     <meta name="generator" content="Hugo 0.115.4" />
     <title>Product example · Bootstrap v5.3</title>
 
@@ -36,14 +39,19 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-md bg-dark sticky-top border-bottom" data-bs-theme="dark">
+    <nav
+      class="navbar navbar-expand-md bg-dark sticky-top border-bottom"
+      data-bs-theme="dark"
+    >
       <div class="container">
-        <a class="navbar-brand d-md-none" href="index.html">
+        <a class="navbar-brand d-md-none" href="#">
           <svg class="bi" width="24" height="24">
             <use xlink:href="#aperture" />
           </svg>
           Aperture
         </a>
+
+        <a class="navbar-brand" href="./index.html">Enjoy Trip</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -70,18 +78,6 @@
             ></button>
           </div>
           <div class="offcanvas-body">
-            <a class="navbar-brand" href="index.html">Enjoy Trip</a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNavAltMarkup"
-              aria-controls="navbarNavAltMarkup"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
             <ul class="navbar-nav flex-grow-1 justify-content-between">
               <li class="nav-item">
                 <a class="nav-link" href="#">
@@ -90,10 +86,16 @@
                   </svg>
                 </a>
               </li>
-              <li class="nav-item"><a class="nav-link" href="./map.html">지도</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="./map.html">지도</a>
+              </li>
               <li class="nav-item"><a class="nav-link" href="#">Product</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Enterprise</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Enterprise</a>
+              </li>
               <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
               <li class="nav-item">
@@ -112,19 +114,31 @@
     <main>
       <div class="container-fluid pt-3">
         <div class="row justify-content-around">
-          <div class="col-6 position-relative overflow-hidden p-3 m-1 text-center">
+          <div
+            class="col-6 position-relative overflow-hidden p-3 m-1 text-center"
+          >
             <div class="col-md-8 mx-auto my-5">
               <h1>여행지를 선택하세요</h1>
               <div class="mt-5 text-center">
-                <img style="width: 300px" src="./assets/undraw_trip_re_f724.svg" alt="" />
+                <img
+                  style="width: 300px"
+                  src="./assets/undraw_trip_re_f724.svg"
+                  alt=""
+                />
               </div>
               <form action="">
                 <div class="input-group m-3" style="min-width: 200px">
-                  <span class="input-group-text" style="width: 50px; background-color: #001e3d">
-                    <i class="bi bi-geo-alt-fill m-auto" style="color: white"></i>
+                  <span
+                    class="input-group-text"
+                    style="width: 50px; background-color: #001e3d"
+                  >
+                    <i
+                      class="bi bi-geo-alt-fill m-auto"
+                      style="color: white"
+                    ></i>
                   </span>
                   <select
-                    id="search-area"
+                    id="index-search-area"
                     class="form-select me-2"
                     aria-label="Default select example"
                     style="background-color: #e6e6e6"
@@ -133,16 +147,23 @@
                   </select>
                 </div>
                 <div class="input-group m-3" style="min-width: 200px">
-                  <span class="input-group-text" style="width: 50px; background-color: #001e3d">
-                    <i class="bi bi-geo-alt-fill m-auto" style="color: white"></i>
+
+                  <span
+                    class="input-group-text"
+                    style="width: 50px; background-color: #001e3d"
+                  >
+                    <i
+                      class="bi bi-geo-alt-fill m-auto"
+                      style="color: white"
+                    ></i>
                   </span>
                   <select
-                    id="search-content-id"
+                    id="index-search-content-id"
                     class="form-select me-2"
                     style="background-color: #e6e6e6"
                   >
                     <option value="0" selected>관광지 유형</option>
-                    <option value="12">관광지</option>
+                    <option value="12" title="관광지">관광지</option>
                     <option value="14">문화시설</option>
                     <option value="15">축제공연행사</option>
                     <option value="25">여행코스</option>
@@ -166,6 +187,7 @@
                   />
                 </div>
                 <button class="btn btn-outline-dark mx-auto mt-3" type="button" onclick="search()">
+
                   <i class="bi bi-search"></i>
                 </button>
               </form>
@@ -181,6 +203,7 @@
                 <h1 class="h3 mb-3 fw-normal">로그인</h1>
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" id="login-id" placeholder="ID" />
+
                   <label for="floatingInput">ID</label>
                 </div>
                 <div class="form-floating">
@@ -286,6 +309,7 @@
                           Close
                         </button>
                         <button type="button" class="btn btn-primary" onclick="regist()">
+
                           Join
                         </button>
                       </div>
@@ -346,6 +370,7 @@
               />
             </svg>
             <small class="d-block mb-3 text-body-secondary">&copy; 2017–2023</small>
+
           </div>
           <div class="col-6 col-md">
             <h5>Features</h5>
@@ -417,7 +442,7 @@
     function makeOption(data) {
       let areas = data.response.body.items.item;
       // console.log(areas);
-      let sel = document.getElementById("search-area");
+      let sel = document.getElementById("index-search-area");
       areas.forEach((area) => {
         let opt = document.createElement("option");
         opt.setAttribute("value", area.code);
