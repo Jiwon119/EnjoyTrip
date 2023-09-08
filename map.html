@@ -31,6 +31,7 @@
         </svg>
         Aperture
       </a>
+      <a class="navbar-brand" href="./index.html">Enjoy Trip</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"
         aria-controls="#offcanvas" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -112,16 +113,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"></script>
-    <script src="./assets/js/main.js"></script>
     <script type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=87c9546ca7e332f072680d8f464022a2&libraries=services,clusterer,drawing"></script>
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bf4175c7edc823e48a143d011d870bbc&libraries=services,clusterer,drawing"></script>
     <script>
       // index page 로딩 후 전국의 시도 설정.
       let areaUrl =
         "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
-        "uWOp5xSY8MADHRhdxsJyE5eWdsFd0dwa6yv1MsYE1le%2BZsyFhIHakIrK%2FZr%2FEAq1%2BIqpDu%2FwAl3sgiqlW609hA%3D%3D" +
+        "f%2Fsa%2FHw%2FRzRUtzZORMTk%2BL099DB20zyk7rha1CUyGYCAtxXn3Wppmjam9AeA5O0KZ%2BWRsLrrM%2FiiAVwz7qxUaA%3D%3D" +
         "&numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json";
-
       // fetch(areaUrl, { method: "GET" }).then(function (response) { return response.json() }).then(function (data) { makeOption(data); });
       fetch(areaUrl, { method: "GET" })
         .then((response) => response.json())
@@ -138,6 +137,41 @@
 
           sel.appendChild(opt);
         });
+
+
+        // 로컬 스토리지에 값이 있으면
+        // 지도 띄우기
+        const searchInfo = localStorage.getItem("map");
+        if (searchInfo != null) {
+          const obj = JSON.parse(searchInfo);
+
+          let areaCode = document.getElementById("search-area");
+          let contentTypeId = document.getElementById("search-content-id");
+          let keyword = document.getElementById("search-keyword");
+          let queryString = `serviceKey=uWOp5xSY8MADHRhdxsJyE5eWdsFd0dwa6yv1MsYE1le%2BZsyFhIHakIrK%2FZr%2FEAq1%2BIqpDu%2FwAl3sgiqlW609hA%3D%3D&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
+
+          for (var i = 0; i < areaCode.options.length; i++) {
+            option = areaCode.options[i];
+            if (option.value == obj.area) {
+              option.selected = true;
+              break;
+            }
+          }
+
+          for (var i = 0; i < contentTypeId.options.length; i++) {
+            option = contentTypeId.options[i];
+            if (option.value == obj.contentId) {
+              option.selected = true;
+              break;
+            }
+          }
+
+          keyword.value = obj.keyword;
+          console.log(keyword.value);
+          callApi(queryString, areaCode.value, contentTypeId.value, keyword.value);
+          window.localStorage.removeItem("map");
+        }
+
       }
 
       // 검색 버튼을 누르면..
@@ -145,14 +179,19 @@
       // 위 데이터를 가지고 공공데이터에 요청.
       // 받은 데이터를 이용하여 화면 구성.
       document.getElementById("btn-search").addEventListener("click", () => {
-        let baseUrl = `https://apis.data.go.kr/B551011/KorService1/`;
-        // let searchUrl = `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=${serviceKey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
-        // let searchUrl = `https://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=${serviceKey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
 
         let queryString = `serviceKey=uWOp5xSY8MADHRhdxsJyE5eWdsFd0dwa6yv1MsYE1le%2BZsyFhIHakIrK%2FZr%2FEAq1%2BIqpDu%2FwAl3sgiqlW609hA%3D%3D&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
         let areaCode = document.getElementById("search-area").value;
         let contentTypeId = document.getElementById("search-content-id").value;
         let keyword = document.getElementById("search-keyword").value;
+
+        callApi(queryString, areaCode, contentTypeId, keyword);
+      });
+
+      function callApi(queryString, areaCode, contentTypeId, keyword) {
+        let baseUrl = `https://apis.data.go.kr/B551011/KorService1/`;
+        // let searchUrl = `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=${serviceKey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
+        // let searchUrl = `https://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=${serviceKey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
 
         if (parseInt(areaCode)) queryString += `&areaCode=${areaCode}`;
         if (parseInt(contentTypeId)) queryString += `&contentTypeId=${contentTypeId}`;
@@ -161,7 +200,7 @@
         //   return;
         // } else searchUrl += `&keyword=${keyword}`;
         let service = ``;
-        if (keyword) {
+        if (keyword || keyword != "") {
           service = `searchKeyword1`;
           queryString += `&keyword=${keyword}`;
         } else {
@@ -172,11 +211,10 @@
         fetch(searchUrl)
           .then((response) => response.json())
           .then((data) => makeList(data));
-      });
+      }
 
       var positions; // marker 배열.
       function makeList(data) {
-        console.log(data);
         document.querySelector("table").setAttribute("style", "display: ; border-radius: 6px; overflow: hidden;");
         let trips = data.response.body.items.item;
         let tripList = ``;

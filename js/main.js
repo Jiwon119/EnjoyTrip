@@ -47,3 +47,23 @@ function login() {
     alert("로그인 실패 !");
   }
 }
+
+function search() {
+  // 문서에서 id로 input data 가져오기
+  let area = document.getElementById("index-search-area").value;
+  let content = document.getElementById("index-search-content-id");
+  let contentId = content.value;
+  let contentName = content.options[content.selectedIndex].text;
+  let keyword = document.getElementById("index-search-keyword").value;
+  console.log(contentName);
+  const map = {
+    area: area,
+    contentId: contentId,
+    contentName: contentName,
+    keyword: keyword,
+  };
+
+  // user 객체 문자열로 바꿔서 로컬스토리지에 저장
+  window.localStorage.setItem("map", JSON.stringify(map));
+  window.location.replace("map.html");
+}
