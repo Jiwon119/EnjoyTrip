@@ -37,13 +37,56 @@ function login() {
 
   // 로컬스토리지에 "user" 키로 저장된 item 가져와서 json 객체로 만들기
   const user = JSON.parse(window.localStorage.getItem("user"));
+  
 
   // 입력값 검증
-  if (user.id == id && user.password == password) {
+  if(!id){
+    alert("아이디를 입력하세요");
+  } else if(!password){
+    alert("비밀번호를 입력하세요");
+  }
+  else if (user != null && user.id == id && user.password == password) {
     alert("로그인 성공 !");
     // 로그인 성공하면 index 페이지로 이동.
-    window.location.replace("index.html");
+    document.getElementById("login-form").style.display = "none";
+    document.getElementById("info-form").style.display = "block";
+    document.getElementById("hello-user").innerHTML = `안녕하세요, ${user.nickname}님`
+
   } else {
     alert("로그인 실패 !");
+  }
+}
+
+function logout(){
+  document.getElementById("login-form").style.display = "block";
+  document.getElementById("info-form").style.display = "none";
+  window.location.replace("index.html");
+}
+
+function update(){
+  let id = document.getElementById("info-id").value;
+  let password = document.getElementById("info-password").value;
+  let passwordCheck = document.getElementById("info-password-check").value;
+  let nickname = document.getElementById("info-nickname").value;
+  let email = document.getElementById("info-email").value;
+  if(!password || !passwordCheck || !nickname || !email){
+    alert("빈칸이 없도록 입력해주세요.");
+    return;
+  }
+  else if(password != passwordCheck){
+    alert("비밀번호가 다릅니다.");
+    return;
+  }else {
+    const user = {
+      id: id,
+      password: password,
+      nickname: nickname,
+      email: email,
+    };
+
+    window.localStorage.setItem("user", JSON.stringify(user));
+    alert("정보 수정 성공!");
+
+    window.location.replace("index.html");
   }
 }
