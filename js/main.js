@@ -26,7 +26,7 @@ function regist() {
     window.localStorage.setItem("user", JSON.stringify(user));
     alert("사용자 등록 성공!");
     // 로그인 화면으로 돌아가기
-    window.location.replace("in.html");
+    window.location.replace("index.html");
   }
 }
 
@@ -42,7 +42,7 @@ function login() {
   if (user.id == id && user.password == password) {
     alert("로그인 성공 !");
     // 로그인 성공하면 index 페이지로 이동.
-    window.location.replace("in.html");
+    window.location.replace("index.html");
   } else {
     alert("로그인 실패 !");
   }
