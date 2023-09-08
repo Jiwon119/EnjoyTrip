@@ -1,0 +1,12 @@
+body{
+  background-image: url("../assets/background2.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: top;
+/* background-attachment: fixed; */
+}
+
+#tripImg{
+  width: 300px;
+  margin: auto;
+}
