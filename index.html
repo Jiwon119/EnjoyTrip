@@ -197,7 +197,7 @@
                   type="button"
                   onclick="search()"
                 >
-                  <i class="bi bi-search"></i>
+                  <i class="bi bi-search"></i> 검색
                 </button>
               </form>
             </div>
@@ -252,12 +252,22 @@
 
                 <button
                   type="button"
-                  class="btn btn-outline-dark w-100 py-2"
+                  class="btn btn-outline-dark w-100 py-2 mb-3"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                   data-bs-whatever="@mdo"
                 >
                   회원가입
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-outline-dark w-100 py-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#findPW"
+                  data-bs-whatever="@mdo"
+                >
+                  비밀번호 찾기
                 </button>
 
                 <div
@@ -344,6 +354,105 @@
                         >
                           Join
                         </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="modal fade"
+                  id="findPW"
+                  tabindex="-1"
+                  aria-labelledby="findPWLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="findPWLabel">
+                          비밀번호 찾기
+                        </h1>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="mb-4">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="find_id"
+                              placeholder="아이디"
+                              required
+                            />
+                          </div>
+                          <div class="mb-4">
+                            <input
+                              type="email"
+                              class="form-control"
+                              id="find_email"
+                              placeholder="이메일"
+                              required
+                            />
+                          </div>
+                        </form>
+                      </div>
+                      <div id="find_btn" class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          닫기
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          onclick="findPW()"
+                        >
+                          입력
+                        </button>
+                      </div>
+                      <!-- 수정 부분 -->
+                      <div id="updateID" style="display: none">
+                        <div class="modal-body">
+                          <div class="mb-4">
+                            <input
+                              type="password"
+                              class="form-control"
+                              id="update-password"
+                              placeholder="비밀번호"
+                              required
+                            />
+                          </div>
+                          <div class="mb-4">
+                            <input
+                              type="password"
+                              class="form-control"
+                              id="update-password-check"
+                              placeholder="비밀번호 확인"
+                              required
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            닫기
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            onclick="updatePW()"
+                          >
+                            수정
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

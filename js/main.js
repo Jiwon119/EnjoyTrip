@@ -37,46 +37,44 @@ function login() {
 
   // 로컬스토리지에 "user" 키로 저장된 item 가져와서 json 객체로 만들기
   const user = JSON.parse(window.localStorage.getItem("user"));
-  
 
   // 입력값 검증
-  if(!id){
+  if (!id) {
     alert("아이디를 입력하세요");
-  } else if(!password){
+  } else if (!password) {
     alert("비밀번호를 입력하세요");
-  }
-  else if (user != null && user.id == id && user.password == password) {
+  } else if (user != null && user.id == id && user.password == password) {
     alert("로그인 성공 !");
     // 로그인 성공하면 index 페이지로 이동.
     document.getElementById("login-form").style.display = "none";
     document.getElementById("info-form").style.display = "block";
-    document.getElementById("hello-user").innerHTML = `안녕하세요, ${user.nickname}님`
-
+    document.getElementById(
+      "hello-user"
+    ).innerHTML = `안녕하세요, ${user.nickname}님`;
   } else {
     alert("로그인 실패 !");
   }
 }
 
-function logout(){
+function logout() {
   document.getElementById("login-form").style.display = "block";
   document.getElementById("info-form").style.display = "none";
   window.location.replace("index.html");
 }
 
-function update(){
+function update() {
   let id = document.getElementById("info-id").value;
   let password = document.getElementById("info-password").value;
   let passwordCheck = document.getElementById("info-password-check").value;
   let nickname = document.getElementById("info-nickname").value;
   let email = document.getElementById("info-email").value;
-  if(!password || !passwordCheck || !nickname || !email){
+  if (!password || !passwordCheck || !nickname || !email) {
     alert("빈칸이 없도록 입력해주세요.");
     return;
-  }
-  else if(password != passwordCheck){
+  } else if (password != passwordCheck) {
     alert("비밀번호가 다릅니다.");
     return;
-  }else {
+  } else {
     const user = {
       id: id,
       password: password,
@@ -90,6 +88,46 @@ function update(){
     window.location.replace("index.html");
   }
 }
+
+function updatePW() {
+  let password = document.getElementById("update-password").value;
+  let passwordCheck = document.getElementById("update-password-check").value;
+
+  const localuser = JSON.parse(window.localStorage.getItem("user"));
+
+  if (password != passwordCheck) {
+    alert("비밀번호가 다릅니다.");
+    return;
+  } else {
+    const user = {
+      id: localuser.id,
+      password: password,
+      nickname: localuser.nickname,
+      email: localuser.email,
+    };
+
+    window.localStorage.setItem("user", JSON.stringify(user));
+    alert("정보 수정 성공!");
+
+    window.location.replace("index.html");
+  }
+}
+
+function findPW() {
+  let id = document.getElementById("find_id").value;
+  let email = document.getElementById("find_email").value;
+  console.log(id);
+  console.log(password);
+  const user = JSON.parse(window.localStorage.getItem("user"));
+  console.log(user);
+  if (user != null && user.id == id && user.email == email) {
+    let find_btn = document.getElementById("find_btn");
+    find_btn;
+    document.getElementById("find_btn").style.display = "none";
+    document.getElementById("updateID").style.display = "block";
+  }
+}
+
 function search() {
   // 문서에서 id로 input data 가져오기
   let area = document.getElementById("index-search-area").value;
