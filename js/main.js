@@ -26,14 +26,14 @@ function regist() {
     window.localStorage.setItem("user", JSON.stringify(user));
     alert("사용자 등록 성공!");
     // 로그인 화면으로 돌아가기
-    window.location.replace("index.html");
+    window.location.replace("in.html");
   }
 }
 
 function login() {
   // 문서에서 id로 input data 가져오기
-  let id = document.getElementById("id").value;
-  let password = document.getElementById("password").value;
+  let id = document.getElementById("login-id").value;
+  let password = document.getElementById("login-password").value;
 
   // 로컬스토리지에 "user" 키로 저장된 item 가져와서 json 객체로 만들기
   const user = JSON.parse(window.localStorage.getItem("user"));
@@ -42,7 +42,7 @@ function login() {
   if (user.id == id && user.password == password) {
     alert("로그인 성공 !");
     // 로그인 성공하면 index 페이지로 이동.
-    window.location.replace("index.html");
+    window.location.replace("in.html");
   } else {
     alert("로그인 실패 !");
   }
