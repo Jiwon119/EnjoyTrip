@@ -45,6 +45,16 @@ function login() {
     alert("비밀번호를 입력하세요");
   } else if (user != null && user.id == id && user.password == password) {
     alert("로그인 성공 !");
+
+    const loginUser = {
+      id: user.id,
+      nickname: user.nickname,
+      email : user.email
+    };
+
+    // user 객체 문자열로 바꿔서 로컬스토리지에 저장
+    localStorage.setItem("loginUser", JSON.stringify(loginUser));
+
     // 로그인 성공하면 index 페이지로 이동.
     document.getElementById("login-form").style.display = "none";
     document.getElementById("info-form").style.display = "block";
@@ -57,6 +67,7 @@ function login() {
 }
 
 function logout() {
+  window.localStorage.removeItem("loginUser");
   document.getElementById("login-form").style.display = "block";
   document.getElementById("info-form").style.display = "none";
   window.location.replace("index.html");
