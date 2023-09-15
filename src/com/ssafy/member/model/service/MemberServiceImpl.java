@@ -5,12 +5,12 @@ import com.ssafy.member.model.dao.MemberDaoImpl;
 
 public class MemberServiceImpl implements MemberService {
 
-	static public MemberServiceImpl instance = new MemberServiceImpl();
+	static public MemberService instance = new MemberServiceImpl();
 
 	private MemberServiceImpl() {
 	}
 
-	public static MemberServiceImpl getMemberService() {
+	public static MemberService getMemberService() {
 		return instance;
 	}
 

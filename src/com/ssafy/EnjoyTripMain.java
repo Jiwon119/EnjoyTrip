@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import com.ssafy.enjoytrip.model.AttractionInfoDto;
+import com.ssafy.enjoytrip.model.service.AttractionService;
 import com.ssafy.enjoytrip.model.service.AttractionServiceImpl;
 
 public class EnjoyTripMain {
@@ -55,9 +56,7 @@ public class EnjoyTripMain {
 		System.out.print("관광지 타입 선택 : ");
 		attractionInfoDto.setContentTypeId(Integer.parseInt(in.readLine()));
 
-		System.out.println(attractionInfoDto);
-		AttractionServiceImpl instance = AttractionServiceImpl.getInstance();
-		List<AttractionInfoDto> attractionList = instance.attractionList(attractionInfoDto);
+		List<AttractionInfoDto> attractionList = AttractionServiceImpl.getInstance().attractionList(attractionInfoDto);
 		for (int i = 0; i < 20; i++) {
 			System.out.println(attractionList.get(i));
 		}
@@ -71,8 +70,7 @@ public class EnjoyTripMain {
 		System.out.print("관광지 지역 선택 : ");
 		int sidoCode = Integer.parseInt(in.readLine());
 
-		AttractionServiceImpl instance = AttractionServiceImpl.getInstance();
-		List<AttractionInfoDto> attractionList = instance.searchByTitle(title, sidoCode);
+		List<AttractionInfoDto> attractionList =  AttractionServiceImpl.getInstance().searchByTitle(title, sidoCode);
 
 		int max = 20;
 		if (attractionList.size() < max)

@@ -10,12 +10,12 @@ import com.ssafy.util.DBUtil;
 
 public class MemberDaoImpl implements MemberDao {
 
-	static private MemberDaoImpl instance = new MemberDaoImpl();
+	static private MemberDao instance = new MemberDaoImpl();
 
 	private MemberDaoImpl() {
 	}
 
-	static public MemberDaoImpl getMemberDao() {
+	static public MemberDao getMemberDao() {
 		return instance;
 	}
 

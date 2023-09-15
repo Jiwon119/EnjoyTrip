@@ -7,12 +7,12 @@ import com.ssafy.board.model.dao.BoardDaoImpl;
 
 public class BoardServiceImpl implements BoardService {
 
-	private static BoardServiceImpl instance = new BoardServiceImpl();
+	private static BoardService instance = new BoardServiceImpl();
 
 	private BoardServiceImpl() {
 	}
 
-	public static BoardServiceImpl getInstance() {
+	public static BoardService getInstance() {
 		return instance;
 	}
 

@@ -7,12 +7,12 @@ import com.ssafy.enjoytrip.model.dao.AttractionDaoImpl;
 
 public class AttractionServiceImpl implements AttractionService {
 
-	private static AttractionServiceImpl instance = new AttractionServiceImpl();
+	private static AttractionService instance = new AttractionServiceImpl();
 
 	private AttractionServiceImpl() {
 	}
 
-	public static AttractionServiceImpl getInstance() {
+	public static AttractionService getInstance() {
 		return instance;
 	}
 

@@ -14,12 +14,12 @@ import com.ssafy.util.DBUtil;
 
 public class AttractionDaoImpl implements AttractionDao {
 
-	private static AttractionDaoImpl instance = new AttractionDaoImpl();
+	private static AttractionDao instance = new AttractionDaoImpl();
 
 	private AttractionDaoImpl() {
 	}
 
-	public static AttractionDaoImpl getInstance() {
+	public static AttractionDao getInstance() {
 		return instance;
 	}
 
@@ -33,8 +33,6 @@ public class AttractionDaoImpl implements AttractionDao {
 
 		try {
 			conn = instance.getConnection();
-			System.out.println("DB 연결 성공");
-
 			String sql = "select * from attraction_info";
 
 			boolean ck = false;
@@ -51,8 +49,7 @@ public class AttractionDaoImpl implements AttractionDao {
 			}
 
 			pstmt = conn.prepareStatement(sql);
-			System.out.println("select 성공");
-			System.out.println(sql);
+
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -78,6 +75,8 @@ public class AttractionDaoImpl implements AttractionDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			instance.close(rs, pstmt, conn);
 		}
 
 		return list;
@@ -93,8 +92,6 @@ public class AttractionDaoImpl implements AttractionDao {
 
 		try {
 			conn = instance.getConnection();
-			System.out.println("DB 연결 성공");
-
 			String sql = "select * from attraction_info where title like '%" + title + "%'";
 
 			if (sidoCode != 0) {
@@ -102,8 +99,6 @@ public class AttractionDaoImpl implements AttractionDao {
 			}
 
 			pstmt = conn.prepareStatement(sql);
-			System.out.println("select 성공");
-			System.out.println(pstmt);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -128,6 +123,8 @@ public class AttractionDaoImpl implements AttractionDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			instance.close(rs, pstmt, conn);
 		}
 
 		return list;
