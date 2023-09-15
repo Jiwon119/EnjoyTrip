@@ -4,12 +4,14 @@ import com.ssafy.member.model.MemberDto;
 
 public interface MemberDao {
 
-	void registerMember(MemberDto memberDto);
+	boolean registerMember(MemberDto memberDto);
 
 	MemberDto login(String userId, String userPass);
 
-	void modifyMember(MemberDto memberDto);
+	boolean modifyMember(MemberDto memberDto);
 
-	void deleteMember(String userId);
-	
+	boolean deleteMember(String userId);
+
+	MemberDto findMember(String userId);
+
 }

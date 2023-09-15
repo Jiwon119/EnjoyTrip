@@ -3,8 +3,11 @@ package com.ssafy.member.model;
 public class MemberDto {
 
 	private String userId;
-	private String userName;
 	private String userPass;
+	private String userEmail;
+	private String userName;
+	private String userBirth;
+	private String userPhone;
 	private String joinDate;
 
 	public String getUserId() {
@@ -39,10 +42,34 @@ public class MemberDto {
 		this.joinDate = joinDate;
 	}
 
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public String getUserBirth() {
+		return userBirth;
+	}
+
+	public void setUserBirth(String userBirth) {
+		this.userBirth = userBirth;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+
 	@Override
 	public String toString() {
-		return "MemberDto [userId=" + userId + ", userName=" + userName + ", userPass=" + userPass + ", joinDate="
-				+ joinDate + "]";
+		return "[userId=" + userId + ", userPass=" + userPass + ", userEmail=" + userEmail + ", userName=" + userName
+				+ ", userBirth=" + userBirth + ", userPhone=" + userPhone + ", joinDate=" + joinDate + "]";
 	}
 
 }
