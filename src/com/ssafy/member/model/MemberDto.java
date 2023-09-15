@@ -68,8 +68,8 @@ public class MemberDto {
 
 	@Override
 	public String toString() {
-		return "[userId=" + userId + ", userPass=" + userPass + ", userEmail=" + userEmail + ", userName=" + userName
-				+ ", userBirth=" + userBirth + ", userPhone=" + userPhone + ", joinDate=" + joinDate + "]";
+		return "MemberDto [userId=" + userId + ", userPass=" + userPass + ", userEmail=" + userEmail + ", userName="
+				+ userName + ", userBirth=" + userBirth + ", userPhone=" + userPhone + ", joinDate=" + joinDate + "]";
 	}
 
 }
