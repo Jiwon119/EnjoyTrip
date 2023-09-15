@@ -9,16 +9,16 @@
 
 ## 1. 관광지 조회
 #### 1-1. 지역, 컨텐츠 타입별 관광지 정보 검색  
-![1-1](/uploads/f69d28e63dfef5cac9a037358ced4c71/1-1.PNG)  
+![1-1](/uploads/f79def9605825d6d2bf6fbb043b62b95/1-1.PNG)  
   
 #### 1-2. 관광지 명으로 관광지 정보 검색  
-![1-2](/uploads/e044ada2de02f4d7291f0dc80bf9d2d3/1-2.PNG)  
+![1-2](/uploads/d327cb75cf81d9b4419577c7d8c2f256/1-2.PNG)  
   
   
 ## 2. 회원 조회
 #### 2-1. 회원가입, 아이디 중복 시 회원가입 실패  
 ![2-1](/uploads/6782f2a2bb43b5b3bca2d768384585db/2-1.PNG)  
-![2-1-1](/uploads/e13b77e1917710b45ea0a4679b9644da/2-1-1.PNG)  
+![2-1-1](/uploads/a7015534f17f278cc7fb11972eb40204/2-1-1.PNG)  
   
 #### 2-2. 로그인, 성공 시 정보 조회  
 ![2-2](/uploads/1964be32ab68e7a4e4df37f57a7d2ba7/2-2.PNG)  
@@ -27,7 +27,7 @@
 ![2-3](/uploads/a1b3dcb21fd1311896a0f9c70de9ab6a/2-3.PNG)  
   
 #### 2-4. 회원 삭제  
-![2-4](/uploads/e62f7bc184e62a4f3745a1ba14bfd0d2/2-4.PNG)  
+![2-4](/uploads/124a34077a2530ad0277cb4fb085bb43/2-4.PNG)  
   
   
 ## 3. 게시판 조회
@@ -44,4 +44,4 @@
 ![3-4](/uploads/67df1be54a93f545205dd90b6ceb5497/3-4.PNG)  
   
 #### 3-5. 게시글 번호로 게시글 삭제  
-![3-5](/uploads/d1feb6a771ccfb701d4279c9fb81303b/3-5.PNG)  
+![3-5](/uploads/c9f042d4ef11d44dab67406cb9dd0e62/3-5.PNG)  
