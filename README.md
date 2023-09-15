@@ -17,6 +17,9 @@
   
   
 ## 2. 회원 조회
+✔ **user 테이블 구조**  
+![image2](/uploads/9eaa1d46074940631fd0a681f4daf136/image2.png)
+  
 ✔ **2-1. 회원가입, 아이디 중복 시 회원가입 실패**  
 ![2-1](/uploads/6782f2a2bb43b5b3bca2d768384585db/2-1.PNG)  
 ![2-1-1](/uploads/a7015534f17f278cc7fb11972eb40204/2-1-1.PNG)  
@@ -32,6 +35,9 @@
   
   
 ## 3. 게시판 조회
+✔ **board 테이블 구조**  
+![image1](/uploads/bb1d80c4bfc350ba769270bb8c607efa/image1.png)  
+  
 ✔ **3-1. 게시글 등록, 전체 글 조회**  
 ![3-1](/uploads/7abd2527ebca8048fc6578e99f5da0d0/3-1.PNG)  
   
