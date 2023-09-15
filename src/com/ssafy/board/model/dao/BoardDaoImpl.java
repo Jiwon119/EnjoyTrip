@@ -86,7 +86,7 @@ public class BoardDaoImpl implements BoardDao {
 		DBUtil instance = DBUtil.getInstance();
 		try {
 			conn = instance.getConnection();
-			pstmt = conn.prepareStatement("select * from board where subject ='" + subject + "'");
+			pstmt = conn.prepareStatement("select * from board where subject like'%" + subject + "%'");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BoardDto tmp = new BoardDto();
