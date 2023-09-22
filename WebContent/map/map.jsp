@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,7 @@
 
 	<%-- 페이지만의 내용 --%>
 	<!-- 중앙 center content end -->
-	<div class="col-8 mx-auto" onload="a()">
+	<div class="col-8 mx-auto">
 		<div class="display-6 m-5 mb-5 text-center" role="alert">전국 관광지
 			정보</div>
 
@@ -19,24 +20,10 @@
 			<select id="search-area" class="form-select me-2"
 				aria-label="Default select example">
 				<option value="0" selected>검색 할 지역 선택</option>
-			</select>
-			<!-- <select id="search-content-id" class="form-select me-2">
-        <option value="0" selected>관광지 유형</option>
-        <option value="12">관광지</option>
-        <option value="14">문화시설</option>
-        <option value="15">축제공연행사</option>
-        <option value="25">여행코스</option>
-        <option value="28">레포츠</option>
-        <option value="32">숙박</option>
-        <option value="38">쇼핑</option>
-        <option value="39">음식점</option>
-      </select> -->
-
-			<input id="search-keyword" class="form-control me-2" type="search"
+			</select> <input id="search-keyword" class="form-control me-2" type="search"
 				placeholder="검색어" aria-label="검색어" />
 			<button id="btn-search" class="btn btn-outline-success text-nowrap"
 				type="button">검색</button>
-
 		</form>
 
 		<!-- kakao map start -->
@@ -72,8 +59,8 @@
 				</div>
 			</div>
 		</div>
-
 		<!-- kakao map end -->
+
 		<div class="row">
 			<table class="table table-striped m-3 mx-auto" style="display: none;">
 				<thead>
@@ -85,7 +72,21 @@
 						<th>경도</th>
 					</tr>
 				</thead>
-				<tbody id="trip-list"></tbody>
+				<tbody>
+					<c:forEach items="${tripList}" var="area">
+						<tr onclick="moveCenter(${area.mapy}, ${area.mapx});">
+							<td><img src="${area.firstimage}" width="100px"></td>
+							<td>${area.title}</td>
+							<td>${area.addr1}${area.addr2}</td>
+							<td>${Number(area.mapy).toFixed(3)}</td>
+							<td>${Number(area.mapx).toFixed(3)}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				<tbody id="trip-list">
+
+
+				</tbody>
 			</table>
 			<!-- 관광지 검색 end -->
 		</div>
