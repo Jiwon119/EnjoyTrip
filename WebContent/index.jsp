@@ -21,29 +21,29 @@
 					<div class="col-md-8 mx-auto my-5">
 						<h1>여행지를 선택하세요</h1>
 						<div class="mt-5 text-center">
-							<img style="width: 300px" src="./assets/undraw_trip_re_f724.svg"/>
+							<img style="width: 300px" src="./assets/undraw_trip_re_f724.svg" />
 						</div>
 						<form action="" method="post">
-							<input type="hidden" value="indexToMap"/>
+							<input type="hidden" value="indexToMap" />
 							<!-- 지역 선택 -->
 							<div class="input-group m-3" style="min-width: 200px">
 								<span class="input-group-text"
 									style="width: 50px; background-color: #001e3d"> <i
 									class="bi bi-geo-alt-fill m-auto" style="color: white"></i>
-								</span> <select name="index-search-area" id="index-search-area" class="form-select me-2"
-									aria-label="Default select example"
+								</span> <select name="index-search-area" id="index-search-area"
+									class="form-select me-2" aria-label="Default select example"
 									style="background-color: #e6e6e6">
 									<option value="0" selected>검색 할 지역 선택</option>
 								</select>
 							</div>
-							
+
 							<!-- 관광지 유형 선택 -->
 							<div class="input-group m-3" style="min-width: 200px">
 								<span class="input-group-text"
 									style="width: 50px; background-color: #001e3d"> <i
 									class="bi bi-geo-alt-fill m-auto" style="color: white"></i>
-								</span> 
-								<select name="index-search-content" id="index-search-content-id" class="form-select me-2"
+								</span> <select name="index-search-content"
+									id="index-search-content-id" class="form-select me-2"
 									style="background-color: #e6e6e6">
 									<option value="0" selected>관광지 유형</option>
 									<option value="12" title="관광지">관광지</option>
@@ -56,16 +56,15 @@
 									<option value="39">음식점</option>
 								</select>
 							</div>
-							
+
 							<!-- 검색어 입력-->
 							<div class="input-group m-3" style="min-width: 200px">
 								<span class="input-group-text"
 									style="width: 50px; background-color: #001e3d"> <i
 									class="bi bi-geo-alt-fill m-auto" style="color: white"></i>
-								</span> 
-								<input name="index-search-keyword" id="index-search-keyword" class="form-control me-2"
-									style="background-color: #e6e6e6" type="search"
-									placeholder="검색어" aria-label="검색어" />
+								</span> <input name="index-search-keyword" id="index-search-keyword"
+									class="form-control me-2" style="background-color: #e6e6e6"
+									type="search" placeholder="검색어" aria-label="검색어" />
 							</div>
 
 							<button class="btn btn-outline-dark mx-auto mt-3" type="button"
@@ -232,5 +231,21 @@
 		document.querySelector("#index-search-btn").addEventListener("click", () =>  {
 			location.href="./enjoyTrip?action=map";
 		});
+
+       fetch("/region?action=sido", { method: "GET" })
+          .then(function(response) { response.json()})
+          .then(function(data) {makeOption(data);});
+
+	    function makeOption(data) {
+			let areas = data.response.body.items.item;
+			// console.log(areas);
+			let sel = document.getElementById("index-search-area");
+			areas.forEach(function (area){
+				let opt = document.createElement("option");
+				opt.setAttribute("value", area.code);
+				opt.appendChild(document.createTextNode(area.name));
+				sel.appendChild(opt);
+			});
+	    }
 	</script>
 	<%@ include file="/include/footer.jsp"%>
