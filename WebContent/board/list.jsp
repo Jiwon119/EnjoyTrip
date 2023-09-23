@@ -10,15 +10,13 @@
 
 	<div class="row justify-content-center">
 		<div class="col-lg-8 col-md-10 col-sm-12">
-			<h2 class="my-3 py-3 shadow-sm bg-light text-center">
-				<mark class="sky">글목록</mark>
-			</h2>
+			<h2 class="my-3 py-3 text-center"> 여행 후기 </h2>
 		</div>
 		<div class="col-lg-8 col-md-10 col-sm-12">
 			<div class="row align-self-center mb-2">
 				<div class="col-md-2 text-start">
 					<button type="button" id="btn-mv-register"
-						class="btn btn-outline-primary btn-sm">글쓰기</button>
+						class="btn btn-outline-success btn-sm">글쓰기</button>
 				</div>
 				<div class="col-md-7 offset-3">
 					<form class="d-flex" id="form-search" action="">
@@ -34,7 +32,7 @@
 						<div class="input-group input-group-sm">
 							<input type="text" name="word" id="word" class="form-control"
 								placeholder="검색어..." />
-							<button id="btn-search" class="btn btn-dark" type="button">검색</button>
+							<button id="btn-search" class="btn btn-success" type="button">검색</button>
 						</div>
 					</form>
 				</div>

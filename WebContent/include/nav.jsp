@@ -14,8 +14,8 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">Enterprise</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">Support</a></li>
 					<li class="nav-item"><a class="nav-link" href="${root}/user/mypage.jsp">유저</a></li>
+					<li class="nav-item"><a class="nav-link" href="${root}/user/login.jsp">로그인</a></li>
 				</ul>
 			</div>
 		</div>
