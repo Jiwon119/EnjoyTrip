@@ -230,15 +230,33 @@
 	<script type="text/javascript">
 		document.querySelector("#index-search-btn").addEventListener("click", () =>  {
 			location.href="./enjoyTrip?action=map";
+		}); 
+
+       fetch("/04_EnjoyTrip_Back/region?action=sido", { method: "GET" })
+          .then(function(response) { 
+        	  return response.json()})
+          .then(function(data) { 
+        	  makeOption(data)});
+       
+       function makeOption(data){
+    	   console.log("data");
+			console.log("in make option");
+    	   let areas = data;
+    	   let sel = document.getElementById("index-search-area");
+			areas.forEach(function (area){
+			let opt = document.createElement("option");
+			opt.setAttribute("value", area["sidoCode"]);
+			opt.appendChild(document.createTextNode(area["sidoName"]));
+			sel.appendChild(opt);
 		});
+       }
 
-       fetch("/region?action=sido", { method: "GET" })
-          .then(function(response) { response.json()})
-          .then(function(data) {makeOption(data);});
-
+       /*
 	    function makeOption(data) {
-			let areas = data.response.body.items.item;
-			// console.log(areas);
+			console.log("in make option");
+			//let areas = data.response.body.items.item;
+			let areas = data;
+			console.log(areas);
 			let sel = document.getElementById("index-search-area");
 			areas.forEach(function (area){
 				let opt = document.createElement("option");
@@ -247,5 +265,6 @@
 				sel.appendChild(opt);
 			});
 	    }
+       */
 	</script>
 	<%@ include file="/include/footer.jsp"%>

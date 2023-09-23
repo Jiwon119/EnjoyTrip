@@ -1,6 +1,8 @@
 package com.ssafy.region.controller;
 
 import java.io.IOException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.cj.xdevapi.JsonArray;
 import com.ssafy.enjoytrip.model.AttractionInfoDto;
 import com.ssafy.enjoytrip.model.service.AttractionService;
 import com.ssafy.enjoytrip.model.service.AttractionServiceImpl;
@@ -32,12 +36,13 @@ public class RegionController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
-		
-		String path = "";
+
+//		String path = "";
 		if ("sido".equals(action)) {
-			path = getAllSido(request, response);
-			forward(request, response, path);
-		} 
+//			path = getAllSido(request, response);
+//			forward(request, response, path);
+			getAllSido(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -55,17 +60,26 @@ public class RegionController extends HttpServlet {
 	private void redirect(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
 		response.sendRedirect(request.getContextPath() + path);
 	}
-	
-	private String getAllSido(HttpServletRequest request, HttpServletResponse response) {
+
+	private List<RegionDto> getAllSido(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			List<RegionDto> list =  service.getAllSido();
-			request.setAttribute("sido", list);
+//			request.setAttribute("sido", list);
+			
+			ObjectMapper objectMapper = new ObjectMapper();
+			String json = objectMapper.writeValueAsString(list);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(json);
+			System.out.println(json);
+			return null;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("msg", "목록 로드 실패");
-			return "/error/error.jsp";
+//			return "/error/error.jsp";
+			return null;
 		}
-		return "index.jsp";
+//		return "index.jsp";
 	}
 }

@@ -14,18 +14,29 @@
 			
 		}      
 
-      function makeOption(data) {
-        let areas = data.response.body.items.item;
-        // console.log(areas);
-        let sel = document.getElementById("search-area");
-        areas.forEach((area) => {
-          let opt = document.createElement("option");
-          opt.setAttribute("value", area.code);
-          opt.appendChild(document.createTextNode(area.name));
+		
 
-          sel.appendChild(opt);
-        });
+		/*
+		 * function makeOption(data) { let areas =
+		 * data.response.body.items.item; // console.log(areas); let sel =
+		 * document.getElementById("search-area"); areas.forEach((area) => { let
+		 * opt = document.createElement("option"); opt.setAttribute("value",
+		 * area.code); opt.appendChild(document.createTextNode(area.name));
+		 * 
+		 * sel.appendChild(opt); });
+		 */
 
+		function makeOption(data){
+	    	   console.log("data");
+				console.log("in make option");
+	    	   let areas = data;
+	    	   let sel = document.getElementById("index-search-area");
+				areas.forEach(function (area){
+				let opt = document.createElement("option");
+				opt.setAttribute("value", area["sidoCode"]);
+				opt.appendChild(document.createTextNode(area["sidoName"]));
+				sel.appendChild(opt);
+			});
 
         // 로컬 스토리지에 값이 있으면
         // 지도 띄우기
