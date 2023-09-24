@@ -11,5 +11,7 @@ public interface MemberService {
 	boolean modifyMember(MemberDto memberDto);
 
 	boolean deleteMember(String userId);
+	
+	MemberDto findMember(String userId);
 
 }

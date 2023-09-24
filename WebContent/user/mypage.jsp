@@ -11,39 +11,56 @@
 	<div class="col-6 mx-auto">
 		<div class="display-6 m-5 mb-5 text-center" role="alert">내 정보</div>
 
-		<form>
+		<form action="${root }/member" method="post">
+			<input type="hidden" name="action" value="update">
+
 			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="info-id"
-					placeholder="ID" readonly /> <label for="floatingInput">ID</label>
+				<input type="text" class="form-control" id="info_id" name="info_id"
+					placeholder="ID" value="${user.userId }" readonly /> <label
+					for="floatingInput">ID</label>
 			</div>
 
 			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="info-email"
-					placeholder="E-mail" /> <label for="floatingInput">E-mail</label>
+				<input type="text" class="form-control" id="info_email"
+					name="info_email" placeholder="E-mail" value="${user.userEmail }" />
+				<label for="floatingInput">E-mail</label>
 			</div>
 
 			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="info-nickname"
-					placeholder="Nickname" /> <label for="floatingInput">Nickname</label>
-			</div>
-
-
-			<div class="form-floating mb-3">
-				<input type="password" class="form-control" id="info-password"
-					placeholder="Password" /> <label for="floatingPassword">Password</label>
+				<input type="text" class="form-control" id="info_name"
+					name="info_name" placeholder="Name" value="${user.userName }" /> <label
+					for="floatingInput">Name</label>
 			</div>
 
 			<div class="form-floating mb-3">
-				<input type="password" class="form-control" id="info-password-check"
-					placeholder="Password" /> <label for="floatingPassword">Password
+				<input type="password" class="form-control" id="info_password"
+					name="info_password" placeholder="Password"
+					value="${user.userPass }" /> <label for="floatingPassword">Password</label>
+			</div>
+
+			<div class="form-floating mb-3">
+				<input type="password" class="form-control" id="info_password_check"
+					name="info_password_check" placeholder="Password"
+					value="${user.userPass }" /> <label for="floatingPassword">Password
 					Check</label>
 			</div>
 
+			<div class="form-floating mb-3">
+				<input type="date" class="form-control" id="info_birthday"
+					name="info_birthday" placeholder="Birthday"
+					value="${user.userBirth }" /> <label for="floatingInput">Birthday</label>
+			</div>
 
+			<div class="form-floating mb-3">
+				<input type="text" class="form-control" id="info_phone_number"
+					name="info_phone_number" placeholder="PhoneNumber"
+					value="${user.userPhone }" /> <label for="floatingInput">Phone
+					Number</label>
+			</div>
+
+			<button class="btn btn-outline-dark w-100 py-2 mb-3" type="submit">수정</button>
 			<button class="btn btn-outline-dark w-100 py-2 mb-3" type="button"
-				onclick="update()">수정</button>
-			<button class="btn btn-outline-dark w-100 py-2 mb-3" type="button"
-				onclick="location.href='index.html'">취소</button>
+				onclick="location.href='../index.jsp'">취소</button>
 		</form>
 	</div>
 	<script>

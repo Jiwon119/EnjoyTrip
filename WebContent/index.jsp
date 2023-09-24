@@ -74,7 +74,7 @@
 						</form>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
@@ -90,8 +90,6 @@
         	  makeOption(data)});
        
        function makeOption(data){
-    	   console.log("data");
-			console.log("in make option");
     	   let areas = data;
     	   let sel = document.getElementById("index-search-area");
 			areas.forEach(function (area){

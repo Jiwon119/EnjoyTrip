@@ -5,7 +5,7 @@ import com.ssafy.member.model.dao.MemberDaoImpl;
 
 public class MemberServiceImpl implements MemberService {
 
-	static public MemberService instance = new MemberServiceImpl();
+	static private MemberService instance = new MemberServiceImpl();
 
 	private MemberServiceImpl() {
 	}
@@ -37,6 +37,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean deleteMember(String userId) {
 		return MemberDaoImpl.getMemberDao().deleteMember(userId);
+	}
+
+	@Override
+	public MemberDto findMember(String userId) {
+		return MemberDaoImpl.getMemberDao().findMember(userId);
 	}
 
 }
