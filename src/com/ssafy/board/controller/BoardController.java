@@ -93,8 +93,8 @@ public class BoardController extends HttpServlet {
 
 	private String list(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		if (memberDto != null) {
+//		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+//		if (memberDto != null) {
 			try {
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("pgno", pgno + "");
@@ -113,14 +113,13 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("msg", "글목록 출력 중 문제 발생!!!");
 				return "/error/error.jsp";
 			}
-		} else
-			return "/user/login.jsp";
+//		} else return "/user/login.jsp";
 	}
 
 	private String view(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		if (memberDto != null) {
+//		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+//		if (memberDto != null) {
 			int articleNo = Integer.parseInt(request.getParameter("articleno"));
 			try {
 				BoardDto boardDto = boardService.getArticle(articleNo);
@@ -133,16 +132,16 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("msg", "글내용 출력 중 문제 발생!!!");
 				return "/error/error.jsp";
 			}
-		} else
-			return "/user/login.jsp";
+//		} else return "/user/login.jsp";
 	}
 
 	private String write(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		if (memberDto != null) {
+//		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+//		if (memberDto != null) {
 			BoardDto boardDto = new BoardDto();
-			boardDto.setUserId(memberDto.getUserId());
+//			boardDto.setUserId(memberDto.getUserId());
+			boardDto.setUserId("ssafy");
 			boardDto.setSubject(request.getParameter("subject"));
 			boardDto.setContent(request.getParameter("content"));
 			try {
@@ -153,8 +152,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("msg", "글작성 중 문제 발생!!!");
 				return "/error/error.jsp";
 			}
-		} else
-			return "/user/login.jsp";
+//		} else return "/user/login.jsp";
 	}
 
 	private String mvModify(HttpServletRequest request, HttpServletResponse response) {
@@ -162,15 +160,15 @@ public class BoardController extends HttpServlet {
 		// TODO : 글번호에 해당하는 글정보를 얻고 글정보를 가지고 modify.jsp로 이동.
 		try {
 			HttpSession session = request.getSession();
-			MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-			if(memberDto != null) {
+//			MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+//			if(memberDto != null) {
 				int articleNo = Integer.parseInt(request.getParameter("articleno"));
 				BoardDto boardDto = boardService.getArticle(articleNo);
 				request.setAttribute("article", boardDto);
 				
 				return "/board/modify.jsp";
-			} else
-				return "/user/login.jsp";
+//			} 
+//		else return "/user/login.jsp";
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("msg", "글내용 얻는 중 문제 발생!!!");
