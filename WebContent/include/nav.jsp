@@ -12,8 +12,7 @@
 					<li class="nav-item ms-5 me-auto"><a class="nav-link"
 						href="${root}/enjoyTrip?action=map">지도</a></li>
 					<li class="nav-item me-auto"><a class="nav-link"
-						href="${root}/board/list.jsp">게시판</a></li>
-
+						href="${root}/article?action=list">게시판</a></li>
 					<c:if test="${sessionScope.user ne null}">
 						<li class="nav-item ms-auto"><a class="nav-link"
 							href="${root}/user/mypage.jsp">내 정보</a></li>
