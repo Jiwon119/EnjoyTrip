@@ -71,7 +71,7 @@
 							aria-label="Close"></button>
 					</div>
 					<form onsubmit="return checkForm();" method="post"
-						action="/04_EnjoyTrip_Back/member">
+						action="${root }/member">
 
 						<input type="hidden" name="action" value="regist">
 						<div class="modal-body">
@@ -81,7 +81,7 @@
 							</div>
 
 							<div class="form-floating mb-3">
-								<input type="text" class="form-control" id="email" name="email"
+								<input type="email" class="form-control" id="email" name="email"
 									placeholder="E-mail" required /> <label for="floatingInput">E-mail</label>
 							</div>
 
@@ -137,14 +137,17 @@
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form>
-							<div class="mb-4">
+						<form method="post" action="${root }/member">
+							<input type="hidden" name="action" value="findPassword">
+							<div class="form-floating mb-3">
 								<input type="text" class="form-control" id="find_id"
-									placeholder="아이디" />
+									name="find_id" placeholder="ID" required /> <label
+									for="floatingInput">ID</label>
 							</div>
-							<div class="mb-4">
+							<div class="form-floating mb-3">
 								<input type="email" class="form-control" id="find_email"
-									placeholder="이메일" />
+									name="find_email" placeholder="E-mail" required /> <label
+									for="floatingInput">E-mail</label>
 							</div>
 						</form>
 					</div>
@@ -154,23 +157,6 @@
 						<button type="button" class="btn btn-primary" onclick="findPW()">입력</button>
 					</div>
 
-					<!-- 수정 부분 -->
-					<div id="updateID" style="display: none">
-						<div class="modal-body">
-							<div class="mb-4">
-								<input type="password" class="form-control" id="update-password"
-									placeholder="비밀번호" />
-							</div>
-							<div class="mb-4">
-								<input type="password" class="form-control"
-									id="update-password-check" placeholder="비밀번호 확인" />
-							</div>
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">닫기</button>
-							<button type="button" class="btn btn-primary"
-								onclick="updatePW()">수정</button>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -204,6 +190,25 @@
 				return false;
 			} else
 				return true;
+		}
+
+		function findPW() {
+			let find_id = document.getElementById("find_id").value;
+			let find_email = document.getElementById("find_email").value;
+			let url = "/04_EnjoyTrip_Back/member?action=findPassword&find_id="
+					+ find_id + "&find_email=" + find_email;
+
+			fetch(url).then(function(response) {
+				return response.text();
+			}).then(function(data) {
+				console.log("in findPW return");
+				console.log("data is " + data);
+				if (data != "no") {
+					alert("비밀번호: " + data);
+				} else {
+					alert("존재하지 않는 회원입니다.");
+				}
+			});
 		}
 	</script>
 

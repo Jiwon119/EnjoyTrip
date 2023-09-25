@@ -143,4 +143,40 @@ public class MemberDaoImpl implements MemberDao {
 		return null;
 	}
 
+	@Override
+	public MemberDto findMemberByIdEmail(String id, String email) {
+		DBUtil instance = DBUtil.getInstance();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DBUtil.getInstance().getConnection();
+			pstmt = conn.prepareStatement("select * from user where user_id = ? and user_email = ?;");
+			pstmt.setString(1, id);
+			pstmt.setString(2, email);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			MemberDto memberDto = new MemberDto();
+
+			if (rs.next()) {
+				memberDto.setUserId(rs.getString(1));
+				memberDto.setUserPass(rs.getString(2));
+				memberDto.setUserEmail(rs.getString(3));
+				memberDto.setUserName(rs.getString(4));
+				memberDto.setUserBirth(rs.getString(5));
+				memberDto.setUserPhone(rs.getString(6));
+				memberDto.setJoinDate(rs.getString(7));
+			} else
+				return null;
+
+			return memberDto;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			instance.close(conn, pstmt);
+		}
+		return null;
+	}
+
 }

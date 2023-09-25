@@ -43,7 +43,23 @@ public class MemberController extends HttpServlet {
 			doLogout(request, response);
 		} else if ("update".equals(action)) {
 			doUpdate(request, response);
+		} else if ("findPassword".equals(action)) {
+			doFindPassword(request, response);
+		} else if ("delete".equals(action)) {
+			doDeleteMember(request, response);
 		}
+	}
+
+	private void doDeleteMember(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		String userId = request.getParameter("user_id");
+		service.deleteMember(userId);
+
+		request.getSession().invalidate();
+
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write("deleted");
 	}
 
 	protected void doRegist(HttpServletRequest request, HttpServletResponse response)
@@ -115,5 +131,29 @@ public class MemberController extends HttpServlet {
 		service.modifyMember(member);
 
 		response.sendRedirect("/04_EnjoyTrip_Back/index.jsp");
+	}
+
+	private void doFindPassword(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("find_id");
+		String email = request.getParameter("find_email");
+
+		MemberDto member = service.findMemberByIdEmail(id, email);
+		if (member == null) {
+			try {
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write("no");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				response.setContentType("text/plain");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(member.getUserPass());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

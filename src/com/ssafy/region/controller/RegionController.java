@@ -71,7 +71,6 @@ public class RegionController extends HttpServlet {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(json);
-			System.out.println(json);
 			return null;
 			
 		} catch (Exception e) {

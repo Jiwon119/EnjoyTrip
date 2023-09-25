@@ -1,11 +1,13 @@
 package com.ssafy.member.model.service;
 
 import com.ssafy.member.model.MemberDto;
+import com.ssafy.member.model.dao.MemberDao;
 import com.ssafy.member.model.dao.MemberDaoImpl;
 
 public class MemberServiceImpl implements MemberService {
 
 	static private MemberService instance = new MemberServiceImpl();
+	MemberDao dao = MemberDaoImpl.getMemberDao();
 
 	private MemberServiceImpl() {
 	}
@@ -16,9 +18,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean registerMember(MemberDto memberDto) {
-		MemberDto member = MemberDaoImpl.getMemberDao().findMember(memberDto.getUserId());
+		MemberDto member = dao.findMember(memberDto.getUserId());
 		if (member == null) {
-			return MemberDaoImpl.getMemberDao().registerMember(memberDto);
+			return dao.registerMember(memberDto);
 		}
 		return false;
 
@@ -26,22 +28,29 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberDto login(String userId, String userPass) {
-		return MemberDaoImpl.getMemberDao().login(userId, userPass);
+		return dao.login(userId, userPass);
 	}
 
 	@Override
 	public boolean modifyMember(MemberDto memberDto) {
-		return MemberDaoImpl.getMemberDao().modifyMember(memberDto);
+		return dao.modifyMember(memberDto);
 	}
 
 	@Override
 	public boolean deleteMember(String userId) {
-		return MemberDaoImpl.getMemberDao().deleteMember(userId);
+		return dao.deleteMember(userId);
 	}
 
 	@Override
 	public MemberDto findMember(String userId) {
-		return MemberDaoImpl.getMemberDao().findMember(userId);
+		return dao.findMember(userId);
 	}
+
+	@Override
+	public MemberDto findMemberByIdEmail(String id, String email) {
+		return dao.findMemberByIdEmail(id, email);
+	}
+
+
 
 }

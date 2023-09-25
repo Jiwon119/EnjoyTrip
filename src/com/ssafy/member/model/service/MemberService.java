@@ -14,4 +14,6 @@ public interface MemberService {
 	
 	MemberDto findMember(String userId);
 
+	MemberDto findMemberByIdEmail(String id, String email);
+
 }
