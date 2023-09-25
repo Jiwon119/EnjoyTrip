@@ -73,3 +73,16 @@
 ![5 content-delete](https://github.com/BBSSJJ/BOJ/assets/77558985/89c42c01-f8b6-44e7-ac03-49e541774327)
 
 
+
+
+## 6. 지도
+✔ **6-1. 지도 화면** 
+![6 map-default](https://github.com/BBSSJJ/BOJ/assets/77558985/8997a2cf-9d4d-4a14-9745-6be54617fe44)
+
+✔ **6-2. 관광지 정보 지역별, 컨텐츠별 검색** 
+![6 map-type](https://github.com/BBSSJJ/BOJ/assets/77558985/403776a7-4671-4346-8f2c-bc9f75534e1a)
+
+✔ **6-3. 검색어를 통한 검색** 
+![6 map-search](https://github.com/BBSSJJ/BOJ/assets/77558985/16859e5f-599a-4af8-b7f0-162f2f8215a0)
+
+
