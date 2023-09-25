@@ -30,7 +30,7 @@ public class BoardController extends HttpServlet {
 	private String key;
 	private String word;
 	private String queryStrig;
-	
+
 	private BoardService boardService;
 
 	@Override
@@ -42,7 +42,7 @@ public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
-		
+
 		pgno = ParameterCheck.notNumberToOne(request.getParameter("pgno"));
 		key = ParameterCheck.nullToBlank(request.getParameter("key"));
 		word = ParameterCheck.nullToBlank(request.getParameter("word"));
@@ -93,17 +93,18 @@ public class BoardController extends HttpServlet {
 
 	private String list(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-//		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-//		if (memberDto != null) {
+		MemberDto memberDto = (MemberDto) session.getAttribute("user");
+		System.out.println("list : " + memberDto);
+		if (memberDto != null) {
 			try {
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("pgno", pgno + "");
 				map.put("key", key);
 				map.put("word", word);
-				
+
 				List<BoardDto> list = boardService.listArticle(map);
 				request.setAttribute("articles", list);
-				
+
 				PageNavigation pageNavigation = boardService.makePageNavigation(map);
 				request.setAttribute("navigation", pageNavigation);
 
@@ -113,13 +114,14 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("msg", "글목록 출력 중 문제 발생!!!");
 				return "/error/error.jsp";
 			}
-//		} else return "/user/login.jsp";
+		} else
+			return "/user/login.jsp";
 	}
 
 	private String view(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-//		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-//		if (memberDto != null) {
+		MemberDto memberDto = (MemberDto) session.getAttribute("user");
+		if (memberDto != null) {
 			int articleNo = Integer.parseInt(request.getParameter("articleno"));
 			try {
 				BoardDto boardDto = boardService.getArticle(articleNo);
@@ -132,16 +134,16 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("msg", "글내용 출력 중 문제 발생!!!");
 				return "/error/error.jsp";
 			}
-//		} else return "/user/login.jsp";
+		} else
+			return "/user/login.jsp";
 	}
 
 	private String write(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-//		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-//		if (memberDto != null) {
+		MemberDto memberDto = (MemberDto) session.getAttribute("user");
+		if (memberDto != null) {
 			BoardDto boardDto = new BoardDto();
-//			boardDto.setUserId(memberDto.getUserId());
-			boardDto.setUserId("ssafy");
+			boardDto.setUserId(memberDto.getUserId());
 			boardDto.setSubject(request.getParameter("subject"));
 			boardDto.setContent(request.getParameter("content"));
 			try {
@@ -152,7 +154,8 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("msg", "글작성 중 문제 발생!!!");
 				return "/error/error.jsp";
 			}
-//		} else return "/user/login.jsp";
+		} else
+			return "/user/login.jsp";
 	}
 
 	private String mvModify(HttpServletRequest request, HttpServletResponse response) {
@@ -160,15 +163,19 @@ public class BoardController extends HttpServlet {
 		// TODO : 글번호에 해당하는 글정보를 얻고 글정보를 가지고 modify.jsp로 이동.
 		try {
 			HttpSession session = request.getSession();
-//			MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-//			if(memberDto != null) {
+			MemberDto memberDto = (MemberDto) session.getAttribute("user");
+			System.out.println(memberDto);
+
+			if (memberDto != null) {
 				int articleNo = Integer.parseInt(request.getParameter("articleno"));
 				BoardDto boardDto = boardService.getArticle(articleNo);
 				request.setAttribute("article", boardDto);
-				
+
 				return "/board/modify.jsp";
-//			} 
-//		else return "/user/login.jsp";
+			} else {
+				System.out.println(memberDto);
+				return "/user/login.jsp";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("msg", "글내용 얻는 중 문제 발생!!!");
@@ -181,13 +188,13 @@ public class BoardController extends HttpServlet {
 		// TODO : boardDto를 파라미터로 service의 modifyArticle() 호출.
 		// TODO : 글수정 완료 후 view.jsp로 이동.(이후의 프로세스를 생각해 보세요.)
 		HttpSession session = request.getSession();
-		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		if(memberDto != null) {
+		MemberDto memberDto = (MemberDto) session.getAttribute("user");
+		if (memberDto != null) {
 			BoardDto boardDto = new BoardDto();
 			boardDto.setArticleNo(Integer.parseInt(request.getParameter("articleno")));
 			boardDto.setSubject(request.getParameter("subject"));
 			boardDto.setContent(request.getParameter("content"));
-			
+
 			try {
 				boardService.modifyArticle(boardDto);
 				return "/article?action=list&pgno=1&key=&word=";
@@ -196,9 +203,10 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("msg", "글수정 중 문제 발생!!!");
 				return "/error/error.jsp";
 			}
-			
-		} else
+
+		} else {
 			return "/user/login.jsp";
+		}
 	}
 
 	private String delete(HttpServletRequest request, HttpServletResponse response) {
@@ -206,10 +214,10 @@ public class BoardController extends HttpServlet {
 		// TODO : 글번호를 파라미터로 service의 deleteArticle()을 호출.
 		// TODO : 글삭제 완료 후 list.jsp로 이동.(이후의 프로세스를 생각해 보세요.)
 		HttpSession session = request.getSession();
-		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		if(memberDto != null) {
+		MemberDto memberDto = (MemberDto) session.getAttribute("user");
+		if (memberDto != null) {
 			int articleNo = Integer.parseInt(request.getParameter("articleno"));
-			
+
 			try {
 				boardService.deleteArticle(articleNo);
 				return "/article?action=list&pgno=1&key=&word=";
@@ -218,7 +226,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("msg", "글삭제 중 문제 발생!!!");
 				return "/error/error.jsp";
 			}
-			
+
 		} else
 			return "/user/login.jsp";
 	}

@@ -1,5 +1,6 @@
 package com.ssafy.enjoytrip.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.enjoytrip.model.AttractionInfoDto;
 import com.ssafy.enjoytrip.model.service.AttractionService;
 import com.ssafy.enjoytrip.model.service.AttractionServiceImpl;
@@ -32,18 +37,31 @@ public class enjoyTripController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
+		System.out.println(action);
+		
 		
 		String path = "";
 		if ("map".equals(action)) {
 			path = map(request, response);
 			forward(request, response, path);
-		} 
+		}  else{
+//			search(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		doGet(request, response);
+		
+		BufferedReader reader = request.getReader();
+        StringBuilder requestBody = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            requestBody.append(line);
+        }
+        // 요청 본문 내용 출력 (테스트용)
+        System.out.println("요청 본문: " + requestBody.toString());
+        search(request, response, requestBody.toString());
 	}
 
 	private void forward(HttpServletRequest request, HttpServletResponse response, String path)
@@ -69,20 +87,39 @@ public class enjoyTripController extends HttpServlet {
 		return "/map/map.jsp";
 	}
 	
-	private String map(HttpServletRequest request, HttpServletResponse response) {
+	private String search(HttpServletRequest request, HttpServletResponse response, String str) {
 		try {
-//			List<AttractionInfoDto> list = new ArrayList<>();
-//			
-//			AttractionInfoDto info = new AttractionInfoDto();
-//
-//			list = service.attractionList(info);
-//			request.setAttribute("list", list);
+			List<AttractionInfoDto> list = new ArrayList<>();
+
+	        JSONParser jsonParser = new JSONParser();
+	        Object obj = jsonParser.parse(str);
+
+	        AttractionInfoDto att = new AttractionInfoDto();
+	        if (obj instanceof JSONObject) {
+	            JSONObject jsonObject = (JSONObject) obj;
+	            
+	            att.setSidoCode(Integer.parseInt((String) jsonObject.get("areaCode")));
+	            att.setContentTypeId(Integer.parseInt((String) jsonObject.get("contentTypeId")));
+	            att.setTitle((String) jsonObject.get("keyword"));
+	        }
+
+	        list = service.attractionList(att);
+	        
+			ObjectMapper objectMapper = new ObjectMapper();
+			String json = objectMapper.writeValueAsString(list);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(json);
+			return null;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("msg", "목록 로드 실패");
-			return "/error/error.jsp";
+			return null;
 		}
+	}
+	private String map(HttpServletRequest request, HttpServletResponse response) {
+
 		return "/map/map.jsp";
 	}
 }

@@ -22,9 +22,10 @@
 				<option value="0" selected>검색 할 지역 선택</option>
 			</select> <input id="search-keyword" class="form-control me-2" type="search"
 				placeholder="검색어" aria-label="검색어" />
-			<button id="btn-search" class="btn btn-outline-success text-nowrap"
+			<button id="btn_search" class="btn btn-outline-success text-nowrap"
 				type="button">검색</button>
 		</form>
+
 
 		<!-- kakao map start -->
 		<div class="d-flex ">
@@ -72,7 +73,7 @@
 						<th>경도</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="trip_list">
 					<c:forEach items="${tripList}" var="area">
 						<tr onclick="moveCenter(${area.mapy}, ${area.mapx});">
 							<td><img src="${area.firstimage}" width="100px"></td>
@@ -82,11 +83,12 @@
 							<td>${Number(area.mapx).toFixed(3)}</td>
 						</tr>
 					</c:forEach>
-				</tbody>
-				<tbody id="trip-list">
-
 
 				</tbody>
+				<!-- 				<tbody id="trip_list">
+				
+
+				</tbody> -->
 			</table>
 			<!-- 관광지 검색 end -->
 		</div>
@@ -96,27 +98,164 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 		crossorigin="anonymous"></script>
+	<script src="./js/map.js"></script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bf4175c7edc823e48a143d011d870bbc&libraries=services,clusterer,drawing"></script>
-	<script src="./js/jj.js"></script>
 	<script>
-			document.getElementById("btn-search").addEventListener("click", () => {
+	
+		var contentList = [];
+		// 지역 선택 옵션
+		fetch("/04_EnjoyTrip_Back/region?action=sido", {
+			method : "GET"
+		}).then(function(response) {
+			return response.json()
+		}).then(function(data) {
+			makeOption(data)
+		});
+		
+		function makeOption(data) {
+			console.log("data");
+			console.log("in make option");
+			let areas = data;
+			let sel = document.getElementById("search-area");
+			areas.forEach(function(area) {
+				let opt = document.createElement("option");
+				opt.setAttribute("value", area["sidoCode"]);
+				opt.appendChild(document.createTextNode(area["sidoName"]));
+				sel.appendChild(opt);
+			});
+	
+			// 로컬 스토리지에 값이 있으면
+			// 지도 띄우기
+			const searchInfo = localStorage.getItem("map");
+			if (searchInfo != null) {
+				const obj = JSON.parse(searchInfo);
+	
+				let areaCode = document.getElementById("search-area");
+				let contentTypeId = document.querySelectorAll(".btn-check");
+				let keyword = document.getElementById("search-keyword");
+	
+				let areaCodeVal;
+				let keywordVal;
+				let contentTypeIdVal;
+	
+				for (var i = 0; i < areaCode.length; i++) {
+					option = areaCode.options[i];
+					if (option.value == obj.area) {
+						option.selected = true;
+						areaCodeNo = option.value;
+						break;
+					}
+				}
+	
+				for (var i = 0; i < contentTypeId.length; i++) {
+					if (contentTypeId[i].value == obj.contentId) {
+						document.getElementById(contentTypeId[i].id).checked = true;
+						contentList.push(obj.contentId);
+						break;
+					}
+				}
+	
+				keyword.value = obj.keyword;
+				keywordVal = keyword.value;
+				
+				setData();
+				window.localStorage.removeItem("map");
+			}
+		}
 
-	          let queryString = `serviceKey=uWOp5xSY8MADHRhdxsJyE5eWdsFd0dwa6yv1MsYE1le%2BZsyFhIHakIrK%2FZr%2FEAq1%2BIqpDu%2FwAl3sgiqlW609hA%3D%3D&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
-	          let areaCode = document.getElementById("search-area").value;
-	          let contentTypeId = document.getElementById("search-content-id").value;
-	          let keyword = document.getElementById("search-keyword").value;
+		// 관광지 유형 체크 박스
+		function checkBox(checked) {
+	        var value = checked.getAttribute("value");
+	        if (checked.checked == true) {
+	          contentList.push(value);
+	          console.log(contentList + "체크");
+	        } else {
+	          let filtered = contentList.filter((element) => element !== value);
+	          contentList = filtered;
+	          console.log(contentList);
+	        }
+	        setData();
+		}
 
-	          callApi(queryString, areaCode, contentTypeId, keyword);
-	        });
-	      
-	      // 검색 버튼을 누르면..
-	      // 지역, 유형, 검색어 얻기.
-	      // 위 데이터를 가지고 공공데이터에 요청.
-	      // 받은 데이터를 이용하여 화면 구성.
-	      document.getElementById("btn-search").addEventListener("click", () => {
-	        callApi();
+		// 검색 버튼 클릭 이벤트
+	      document.getElementById("btn_search").addEventListener("click", function() {
+ 	    	  document.getElementById("trip_list").innerHTML = "";
+ 	    	  setData();
 	      });
+	      
+	      
+	   // 데이터 받아오기
+	      function setData(){
+	    	  var areaCode = document.getElementById("search-area").value;
+	    	  var contentTypeId = contentList;
+	    	  var keyword = document.getElementById("search-keyword").value;
+
+	    	  console.log(str);
+			  for (var i = 0; i < contentTypeId.length; i++) {
+		    	  var str = JSON.stringify({
+			    	  areaCode: areaCode,
+			    	  contentTypeId: contentTypeId[i],
+			    	  keyword : keyword
+			    	  });
+		    	  
+		    	  fetch("/04_EnjoyTrip_Back/enjoyTrip", {
+			    	  method : "POST",
+			    	  body: str,
+		    	  }). then(function(response) {
+			    	  return response.json()
+		    	  }).then(function(data) {
+			    	  console.log("데이터 받아옴");
+			    	  var tableList = makeList(data);
+			    	  
+			    	  return makeList(data);
+		    	  }).then(function(tableList){
+		    		  document.querySelector("table").setAttribute("style", "display: ; border-radius: 6px; overflow: hidden;");
+		    		  document.getElementById("trip_list").innerHTML += tableList;
+		    	  });
+			  }
+	      }
+	      
+	      
+	   // 읽어온 데이터 화면에 뿌림
+	      let positions = [];
+	      function makeList(data) {
+	    		console.log(data);
+	    		let tripList = "";
+
+	    		if(data.length == 0){
+	    			document.getElementById("trip_list").innerHTML = "<div>데이터가 없습니다.</div>";
+	    			return "";
+	    		}
+	    		
+	    		
+	    		for (var i = 0; i < Math.min(data.length, 10); i++) {
+	    			var firstimage;
+	    			if (data[i].firstimage == '')
+	    				firstimage = "../images/basic.png";
+	    			else
+	    				firstimage = data[i].firstImage;
+	    			
+	    			tripList += "<tr onclick='moveCenter(${area.mapy}, ${area.mapx});'> "
+	    			+ "<td><img src='" + firstimage + "' width='100px'></td> "
+	    			+ "<td>"+ data[i].title + "</td> "
+	    			+ "<td>"+ data[i].addr1 + " " + data[i].addr2 + "</td> "
+	    			+ "<td>"+ data[i].addr1 + " " + data[i].addr2 + "</td> "
+	    			+ "<td>" + Number(data[i].latitude).toFixed(3) + "</td> "
+	    			+ "<td>" + Number(data[i].longitude).toFixed(3) + "</td> " + "</tr>";
+	    			
+	    			
+	    			let markerInfo = {
+	    				title : data[i].title,
+	    				latlng : new kakao.maps.LatLng(data[i].latitude, data[i].longitude),
+	    			};
+	    			positions.push(markerInfo);
+	    		}
+	    		
+	    		displayMarker();
+	    		return tripList;
+	    	}
+	      
 	      // 카카오지도
 	      var mapContainer = document.getElementById("map"), // 지도를 표시할 div
 	        mapOption = {

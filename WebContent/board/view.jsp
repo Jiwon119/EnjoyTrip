@@ -42,7 +42,7 @@
 				<div class="d-flex justify-content-end">
 					<button type="button" id="btn-list"
 						class="btn btn-outline-success mb-3">글목록</button>
-					<c:if test="${userinfo.userId eq article.userId}">
+					<c:if test="${user.userId eq article.userId}">
 						<button type="button" id="btn-mv-modify"
 							class="btn btn-outline-success mb-3 ms-1">글수정</button>
 						<button type="button" id="btn-delete"
