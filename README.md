@@ -45,3 +45,31 @@
 
 ✔ **3-3. 회원 탈퇴**  
 ![3 mypage-delete](https://github.com/BBSSJJ/BOJ/assets/77558985/98733afe-c4e4-4a2f-87d6-60229f82a93f)
+
+
+
+
+## 4. 게시판 관리
+✔ **4-1. 여행 후기 목록** 
+![4 board](https://github.com/BBSSJJ/BOJ/assets/77558985/7063b0a4-2ef3-4469-9f1a-2ced50a4836d)
+
+✔ **4-2. 검색 조건설정 후 검색** 
+![4 board-search](https://github.com/BBSSJJ/BOJ/assets/77558985/fba40f30-63b7-4027-bb35-0f89c6913ffc)
+
+
+
+
+## 5. 게시글 관리
+✔ **5-1. 게시글 작성** 
+![5 content-write](https://github.com/BBSSJJ/BOJ/assets/77558985/0e1d380f-62e3-4995-adda-2e38e7a2ff57)
+
+✔ **5-1. 게시글 보기** 
+![5 content](https://github.com/BBSSJJ/BOJ/assets/77558985/1778cb11-e380-4fa5-b864-3cab4449f978)
+
+✔ **5-1. 게시글 수정** 
+![5 content-fix](https://github.com/BBSSJJ/BOJ/assets/77558985/789b1e98-0a48-4a3c-a2e6-df0d53e82568)
+
+✔ **5-1. 게시글 삭제** 
+![5 content-delete](https://github.com/BBSSJJ/BOJ/assets/77558985/89c42c01-f8b6-44e7-ac03-49e541774327)
+
+
