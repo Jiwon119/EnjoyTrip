@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ssafy.board.model.BoardDto;
 import com.ssafy.enjoytrip.model.AttractionInfoDto;
-import com.ssafy.enjoytrip.model.service.AttractionServiceImpl;
 import com.ssafy.util.DBUtil;
 
 public class AttractionDaoImpl implements AttractionDao {
@@ -30,7 +28,7 @@ public class AttractionDaoImpl implements AttractionDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		System.out.println(attractionInfoDto);
 		try {
 			conn = instance.getConnection();
 			String sql = "select * from attraction_info";
@@ -45,8 +43,21 @@ public class AttractionDaoImpl implements AttractionDao {
 					sql += " and sido_code = " + attractionInfoDto.getSidoCode();
 				} else {
 					sql += " where sido_code = " + attractionInfoDto.getSidoCode();
+					ck = true;
 				}
 			}
+
+			System.out.println("빈 값 체크   : " + attractionInfoDto);
+			System.out.println("빈 값 체크   : " + attractionInfoDto.getTitle());
+			if (!attractionInfoDto.getTitle().isEmpty()) {
+				if (ck) {
+					sql += " and title like '%" + attractionInfoDto.getTitle() + "%'";
+				} else {
+					sql += " where title like '%" + attractionInfoDto.getTitle() + "%'";
+				}
+			}
+
+			System.out.println("sql : " + sql);
 
 			pstmt = conn.prepareStatement(sql);
 

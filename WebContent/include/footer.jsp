@@ -84,7 +84,6 @@
 	crossorigin="anonymous"></script>
 <!--main.js-->
 <script src="./js/main.js"></script>
-<script src="./js/jj.js"></script>
 <!--kakao api-->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=87c9546ca7e332f072680d8f464022a2&libraries=services,clusterer,drawing"></script>
@@ -98,35 +97,6 @@
 		document.getElementById("info-form").style.display = "block";
 		document.getElementById("hello-user").innerHTML = `안녕하세요, ${obj.nickname}님`;
 	}
-<%-- index page 로딩 후 전국의 시도 설정.
-  let areaUrl =
-    "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
-    "uWOp5xSY8MADHRhdxsJyE5eWdsFd0dwa6yv1MsYE1le%2BZsyFhIHakIrK%2FZr%2FEAq1%2BIqpDu%2FwAl3sgiqlW609hA%3D%3D" +
-    "&numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json";
-
-  // fetch(areaUrl, { method: "GET" }).then(function (response) { return response.json() }).then(function (data) { makeOption(data); });
-  fetch(areaUrl, { method: "GET" })
-    .then(function(response) {
-    	response.json()
-    })
-    .then(function(data) {
-    	makeOption(data)
-    });
-
-  function makeOption(data) {
-    let areas = data.response.body.items.item;
-    // console.log(areas);
-    let sel = document.getElementById("index-search-area");
-    areas.forEach(function(area) {
-      let opt = document.createElement("option");
-      opt.setAttribute("value", area.code);
-      opt.appendChild(document.createTextNode(area.name));
-
-      sel.appendChild(opt);
-    });
-  }
-  --%>
-	
 </script>
 
 </html>
