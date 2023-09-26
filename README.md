@@ -27,7 +27,15 @@
 ![RegionCD](https://github.com/BBSSJJ/BOJ/assets/77558985/7b65db9a-202f-4c15-89c6-16d0cb899f84)
 
 
+## Usecase Diagram
+✔ **Member Usecase Diagram**  
+![회원](/uploads/6c5403531813a4fbf9dd633e633b92f9/회원.jpg)  
 
+✔ **Board Usecase Diagram**  
+![여행_후기_게시판](/uploads/8d79f5706fb29a6e73bc41fd182b754b/여행_후기_게시판.jpg)  
+
+✔ **EnjoyTrip Usecase Diagram**  
+![지도](/uploads/01bc298ad5759ee89cf2f7a664e1d9ad/지도.jpg)  
 
 
 ## 1. 메인 화면
