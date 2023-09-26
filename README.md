@@ -11,6 +11,23 @@
 
 
 
+## Class Diagram
+✔ **Member Class Diagram**  
+![MemberCD](https://github.com/BBSSJJ/BOJ/assets/77558985/e9ff7eb8-bd78-4907-b316-d122cf3e1c08)
+
+✔ **Board Class Diagram**  
+![BoardCD](https://github.com/BBSSJJ/BOJ/assets/77558985/0ebe27cb-3483-42f6-bd46-64a20a38ef50)
+
+
+✔ **EnjoyTrip Class Diagram**  
+![TripCD](https://github.com/BBSSJJ/BOJ/assets/77558985/d369a347-db36-4525-939d-77fad3eea937)
+
+
+✔ **Region Class Diagram**  
+![RegionCD](https://github.com/BBSSJJ/BOJ/assets/77558985/7b65db9a-202f-4c15-89c6-16d0cb899f84)
+
+
+
 
 
 ## 1. 메인 화면
