@@ -3,7 +3,7 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="04_EnjoyDB"/>
         <property name="java-output-path" value="/04_EnjoyDB/build/classes"/>
+        <property name="context-root" value="05_EnjoyTrip_Algorithm"/>
     </wb-module>
 </project-modules>
