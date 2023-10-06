@@ -30,12 +30,13 @@ public class MemberDaoImpl implements MemberDao{
 		
 		try {
 			conn = dbUtil.getConnection();
-			String sql = "insert into member(user_id,user_name,user_password,user_email) values (?,?,?,?)";
+			String sql = "insert into member(user_id,user_name,user_password,user_email,salt) values (?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberDto.getUserId());
 			pstmt.setString(2, memberDto.getUserName());
 			pstmt.setString(3, memberDto.getUserPass());
 			pstmt.setString(4, memberDto.getUserEmail());
+			pstmt.setString(5, memberDto.getSalt());			
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -54,16 +55,16 @@ public class MemberDaoImpl implements MemberDao{
 		MemberDto memberDto = new MemberDto();
 		try {
 			conn = dbUtil.getConnection();
-			String sql = "select * from member where user_id = ? and user_password = ?";
+			String sql = "select * from member where user_id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
-			pstmt.setString(2, userPass);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				memberDto.setUserId(rs.getString("user_id"));
 				memberDto.setUserName(rs.getString("user_name"));
 				memberDto.setUserPass(rs.getString("user_password"));
 				memberDto.setUserEmail(rs.getString("user_email"));
+				memberDto.setSalt(rs.getString("salt"));
 			}else {
 				return null;
 			} 

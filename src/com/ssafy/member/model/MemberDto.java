@@ -6,6 +6,7 @@ public class MemberDto {
 	private String userName;
 	private String userPass;
 	private String userEmail;
+	private String salt;
 	
 	public MemberDto() {}
 	
@@ -49,9 +50,17 @@ public class MemberDto {
 		this.userEmail = userEmail;
 	}
 
-	@Override
-	public String toString() {
-		return "MemberDto [userId=" + userId + ", userName=" + userName + ", userPass=" + userPass + "]";
+	public String getSalt() {
+		return salt;
 	}
 
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	@Override
+	public String toString() {
+		return "MemberDto [userId=" + userId + ", userName=" + userName + ", userPass=" + userPass + ", userEmail="
+				+ userEmail + ", salt=" + salt + "]";
+	}
 }
