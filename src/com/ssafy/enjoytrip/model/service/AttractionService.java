@@ -7,5 +7,6 @@ import com.ssafy.enjoytrip.model.AttractionInfoDto;
 public interface AttractionService {
 
 	List<AttractionInfoDto> attractionList(AttractionInfoDto attractionInfoDto, String title);
+	List<AttractionInfoDto> attractionListSort(AttractionInfoDto attractionInfoDto, String title, String sort);
 	
 }

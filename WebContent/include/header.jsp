@@ -17,7 +17,7 @@
 				id="navbarSupportedContent">
 				<ul class="navbar-nav mb-2 me-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="trip.html">지역별관광지</a></li>
+						href="trip.jsp">지역별관광지</a></li>
 				</ul>
 				<!-- 로그인 전 -->
 				<c:if test="${empty loginUser }">

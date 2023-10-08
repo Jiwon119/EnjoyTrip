@@ -50,6 +50,7 @@ public class TripController extends HttpServlet {
 		String areaId = request.getParameter("search-area");
 		String contentId = request.getParameter("search-content-id");
 		String title = request.getParameter("search-keyword");
+		String sort = request.getParameter("sort");
 		// areaId와 contentId의 null값 확인
 		if (areaId != null) {
 			attractionInfoDto.setSidoCode(Integer.parseInt(areaId));
@@ -61,8 +62,12 @@ public class TripController extends HttpServlet {
 		if (title == null) {
 			title = "";
 		}
+		// title이 없는 경우 모두 검색
+		if (sort == null) {
+			sort = "";
+		}
 
-		List<AttractionInfoDto> attractionList = service.attractionList(attractionInfoDto, title);
+		List<AttractionInfoDto> attractionList = service.attractionListSort(attractionInfoDto, title, sort);
 		JSONArray jsonArrayList = new JSONArray();
 		for (AttractionInfoDto dto : attractionList) {
 			JSONObject jObj = new JSONObject();
