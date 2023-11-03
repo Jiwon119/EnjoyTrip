@@ -80,7 +80,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDto myPage(String id) {
+	public MemberDto selectMember(String id) {
 		log.debug("memberid : {}",id);
 		
 		return memberMapper.selectMember(id);

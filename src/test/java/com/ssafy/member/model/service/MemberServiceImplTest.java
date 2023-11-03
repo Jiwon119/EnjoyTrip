@@ -63,7 +63,7 @@ class MemberServiceImplTest {
 	void testMyPage() {
 		log.debug("##### 회원 정보 얻기 테스트 #####");
 		
-		MemberDto member = memberService.myPage("jw");
+		MemberDto member = memberService.selectMember("jw");
 		
 		log.debug("member : {}", member);
 		log.debug("##### 회원 목록 테스트 종료 #####");

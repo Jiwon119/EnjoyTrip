@@ -16,6 +16,6 @@ public interface MemberService {
 	
 	MemberDto searchPass(String id, String email);
 	
-	MemberDto myPage(String id);
+	MemberDto selectMember(String id);
 	
 }

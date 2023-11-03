@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +23,12 @@ import com.ssafy.member.model.MemberDto;
 import com.ssafy.util.PageNavigation;
 import com.ssafy.util.ParameterCheck;
 
-@Controller
+import io.swagger.annotations.Api;
+
+@RestController
 @RequestMapping("/article")
+@CrossOrigin("*")
+@Api(tags = {"Board Controller  API V1"})
 public class BoardController {
 
 	private int pgno;

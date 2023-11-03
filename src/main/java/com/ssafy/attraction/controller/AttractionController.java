@@ -30,7 +30,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/map")
 @CrossOrigin("*")
-@Api(tags = {"어드민 컨트롤러  API V1"})
+@Api(tags = {"Attraction Controller  API V1"})
 public class AttractionController {
 
 	private AttractionService attractionService;
@@ -40,11 +40,11 @@ public class AttractionController {
 		this.attractionService = attractionService;
 	}
 	
-	@ApiOperation(value = "맵", notes = "지도의 <big>전체 목록</big>을 반환해 줍니다.")
+	@ApiOperation(value = "map", notes = "지도의 <big>전체 목록</big>을 반환해 줍니다.")
 	@PostMapping("/mapList")
-	public ResponseEntity<?> list(@RequestParam("area") String area,
-			@RequestParam("type") String type,
-			@RequestParam("keyword") String keyword) {
+	public ResponseEntity<?> list(@RequestParam(value = "area", required = false) String area,
+			@RequestParam(value = "type", required = false) String type,
+			@RequestParam(value = "keyword", required = false) String keyword) {
 
 		if (keyword != null && !keyword.isEmpty())
 			System.out.println("keyword is" + keyword);
@@ -60,11 +60,11 @@ public class AttractionController {
 		return new ResponseEntity<List<AttractionInfoDto>>(list, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value = "맵", notes = "지도의 <big>검색 결과</big>을 반환해 줍니다.")
+	@ApiOperation(value = "map", notes = "지도의 <big>검색 결과</big>을 반환해 줍니다.")
 	@PostMapping("/mapSearch")
-	public ResponseEntity<?> search(@RequestParam("area") String area,
-			@RequestParam("type") String type,
-			@RequestParam("keyword") String keyword) {
+	public ResponseEntity<?> search(@RequestParam(value = "area", required = false) String area,
+			@RequestParam(value = "type", required = false) String type,
+			@RequestParam(value = "keyword", required = false) String keyword) {
 
 		AttractionInfoDto attractionInfoDto = new AttractionInfoDto();
 		if(area != null) attractionInfoDto.setSidoCode(Integer.parseInt(area));

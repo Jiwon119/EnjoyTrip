@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +14,13 @@ import com.ssafy.member.model.MemberDto;
 import com.ssafy.member.model.service.MemberService;
 import com.ssafy.util.DBUtil;
 
-@Controller
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@RestController
 @RequestMapping("/member")
+@CrossOrigin("*")
+@Api(tags = {"Member Controller  API V1"})
 public class MemberController {
 
 	private MemberService memberService;
@@ -33,10 +39,10 @@ public class MemberController {
 //		return "member/mypage";
 //	}
 
+	@ApiOperation(value = "mypage", notes = "유저 정보 페이지")
 	@GetMapping("/mypage/{userid}")
 	public String mypage(HttpSession session, @PathVariable("userid") String id) {
-		MemberDto member = memberService.myPage(id);
-
+		MemberDto member = memberService.selectMember(id);
 		session.setAttribute("mypage", member);
 
 		return "member/mypage";
