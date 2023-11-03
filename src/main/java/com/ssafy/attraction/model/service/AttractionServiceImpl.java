@@ -2,6 +2,7 @@ package com.ssafy.attraction.model.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.attraction.model.AttractionInfoDto;
@@ -11,7 +12,7 @@ import com.ssafy.attraction.model.mapper.AttractionMapper;
 public class AttractionServiceImpl implements AttractionService {
 	
 	private AttractionMapper mapper;
-	
+
 	public AttractionServiceImpl(AttractionMapper mapper) {
 		super();
 		this.mapper = mapper;

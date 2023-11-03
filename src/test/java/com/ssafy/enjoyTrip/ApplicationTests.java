@@ -48,17 +48,4 @@ class ApplicationTests {
 	void contextLoads() {
 		log.debug("##### 회원 목록 테스트 시작 #####");
 	}
-	
-	@Test
-	@Disabled
-	@DisplayName("##### 회원 목록 테스트 #####")
-	void testUserList() throws Exception {
-		
-		log.debug("##### 회원 목록 테스트 시작 #####");
-		mockMvc.perform(get("/admin/user"))
-			.andExpect(status().isOk())
-			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			.andDo(print());
-		log.debug("##### 회원 목록 테스트 종료 #####");
-	}
 }

@@ -1,16 +1,12 @@
 package com.ssafy.member.model.mapper;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.member.model.MemberDto;
-import com.ssafy.util.DBUtil;
 
 @Mapper
 public interface MemberMapper {
 	//로그인 회원가입 비밀번호찾기 마이페이지수정,조회,삭제
-	
 	
 	public int insertMember(MemberDto member);	//멤버추가1
 	

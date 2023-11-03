@@ -33,10 +33,10 @@ public class MemberController {
 //		return "member/mypage";
 //	}
 
-	@GetMapping("/mypage")
+	@GetMapping("/mypage/{userid}")
 	public String mypage(HttpSession session, @PathVariable("userid") String id) {
 		MemberDto member = memberService.myPage(id);
-		System.out.println("member");
+
 		session.setAttribute("mypage", member);
 
 		return "member/mypage";

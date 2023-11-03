@@ -51,10 +51,9 @@ class MemberControllerTest {
 		log.debug("##### 회원 정보 얻기 테스트 #####");
 		mockMvc.perform(get("/member/mypage/" + "ssafy"))
 			.andExpect(status().isOk())
-			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			.andExpect(jsonPath("$.userPwd", is(userPwd)))
 			.andDo(print());
 		log.debug("##### 회원 목록 테스트 종료 #####");
+		
 	}
 
 	@Test
@@ -68,10 +67,8 @@ class MemberControllerTest {
 	@DisplayName("##### 회원 정보 얻기 테스트 #####")
 	void testUserInfo() throws Exception {
 		log.debug("##### 회원 정보 얻기 테스트 #####");
-		mockMvc.perform(get("/admin/user/" + userId))
+		mockMvc.perform(get("/member/mypage/" + userId))
 			.andExpect(status().isOk())
-			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			.andExpect(jsonPath("$.userPwd", is(userPwd)))
 			.andDo(print());
 		log.debug("##### 회원 목록 테스트 종료 #####");
 	}

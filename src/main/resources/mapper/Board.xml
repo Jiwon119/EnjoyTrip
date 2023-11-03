@@ -2,5 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.board.model.mapper.BoardMapper">
-
+	<insert id="writeArticle"></insert>
+	
+	<select id="listArticle"></select>
+	<select id="getTotalArticleCount"></select>
+	<select id="getArticle"></select>
+	<update id="updateHit"></update>
+	<update id="modifyArticle"></update>
+	<delete id="deleteArticle"></delete>
 </mapper>

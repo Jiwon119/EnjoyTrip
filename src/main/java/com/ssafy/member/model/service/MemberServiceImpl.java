@@ -4,10 +4,14 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.member.model.mapper.MemberMapper;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.ssafy.member.model.mapper.MemberMapper;
 import com.ssafy.member.model.MemberDto;
 
 @Service
+@Slf4j
 public class MemberServiceImpl implements MemberService {
 
 	private MemberMapper memberMapper;
@@ -41,24 +45,26 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberMapper.updateMember(member);
 		if(result==1) {
 			System.out.println("service"+member);
-			MemberDto updateMember = memberMapper.selectMember(member.getId()); //한번 더 찾아주기
-			return updateMember;
+//			MemberDto updateMember = memberMapper.selectMember(member.getId()); //한번 더 찾아주기
+//			return updateMember;
 		}
 		else {
 			return null;
 		}
+		return null;
 	}
 	
 	public MemberDto modify(MemberDto member) {
 		int result = memberMapper.updateMember(member);
 		if(result==1) {
 			System.out.println("service"+member);
-			MemberDto updateMember = memberMapper.selectMember(member.getId()); //한번 더 찾아주기
-			return updateMember;
+//			MemberDto updateMember = memberMapper.selectMember(member.getId()); //한번 더 찾아주기
+//			return updateMember;
 		}
 		else {
 			return null;
 		}
+		return null;
 	}
 
 	@Override
@@ -75,8 +81,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberDto myPage(String id) {
-		MemberDto member = memberMapper.selectMember(id);
-		return member;
+		log.debug("memberid : {}",id);
+		
+		return memberMapper.selectMember(id);
 	}
 
 }
