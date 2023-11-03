@@ -1,15 +1,5 @@
 package com.ssafy.member.controller;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -21,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.member.model.MemberDto;
 import com.ssafy.member.model.service.MemberService;
-import com.ssafy.member.model.service.MemberServiceImpl;
 import com.ssafy.util.DBUtil;
 
 @Controller
@@ -35,15 +24,29 @@ public class MemberController {
 		this.memberService = memberService;
 	}
 	
-	@GetMapping("/mypage")
-	private String mypage(HttpSession session, @PathVariable("userid") String id) throws Exception {
+//	@GetMapping("/mypage")
+//	private String mypage(HttpSession session, @PathVariable("userid") String id) {
+//		MemberDto member = memberService.myPage(id);
+//		System.out.println("member");
+//		session.setAttribute("mypage", member);
+//
+//		return "member/mypage";
+//	}
 
+	@GetMapping("/mypage")
+	public String mypage(HttpSession session, @PathVariable("userid") String id) {
 		MemberDto member = memberService.myPage(id);
+		System.out.println("member");
 		session.setAttribute("mypage", member);
 
 		return "member/mypage";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
 	
 //	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 //			throws ServletException, IOException {

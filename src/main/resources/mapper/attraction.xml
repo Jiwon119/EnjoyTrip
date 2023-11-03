@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ssafy.model.mapper.AttractionMapper">
-
+<mapper namespace="com.ssafy.attraction.model.mapper.AttractionMapper">
 	<resultMap type="attractionInfoDto" id="attraction">
 		<result column="content_id" property="contentId"/>
 		<result column="content_type_id" property="contentTypeId"/>
@@ -21,16 +20,9 @@
 		<result column="mlevel" property="mlevel"/>
 	</resultMap>
 
-	<sql id="search">
-		<if test="sidoCode != null and sidoCode != ''">
-			<if test="">
-			
-			</if>
-		</if>
-	</sql>
 
 	<select id="attractionList" parameterType="map" resultMap="attraction">
-		select content_id, content_type_id, title, addr1, addr2, zipcode, tel, first_image, first_image2, readcount, sido_code, gugun_code, latitude, longitude, mlevel
+		<!-- select content_id, content_type_id, title, addr1, addr2, zipcode, tel, first_image, first_image2, readcount, sido_code, gugun_code, latitude, longitude, mlevel
 		from attraction_info
 		<where>
             <if test="attractionInfoDto != null">
@@ -55,7 +47,9 @@
                 where title like '%' || #{title} || '%'
             </if>
         </where>
-        order by content_id limit 100
+        order by content_id limit 100 -->
 	</select>
+	
+	<select id="searchByTitle"></select>
 
 </mapper>

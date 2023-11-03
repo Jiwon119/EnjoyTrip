@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +30,22 @@ public class AttractionController {
 		this.attractionService = attractionService;
 	}
 	
-	////////////////////////////////////////////////////////////////
+//	@PostMapping("/mapSearch")
+//	private void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		String area = req.getParameter("area");
+//		String type = req.getParameter("type");
+//		String keyword = req.getParameter("keyword");
+//		if (keyword != null && !keyword.isEmpty())
+//			System.out.println("keyword is" + keyword);
+//		AttractionInfoDto attractionInfoDto = new AttractionInfoDto();
+//		if (area != null)
+//			attractionInfoDto.setSidoCode(Integer.parseInt(area));
+//		if (type != null)
+//			attractionInfoDto.setContentTypeId(Integer.parseInt(type));
+//		List<AttractionInfoDto> list = attractionService.attractionList(attractionInfoDto, keyword);
+//		req.setAttribute("result", list);
+//		req.getRequestDispatcher("/map/map.jsp").forward(req, resp);
+//	}
 	
 //	@Override
 //	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

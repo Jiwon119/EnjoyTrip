@@ -1,11 +1,13 @@
 package com.ssafy.member.model.service;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Service;
 
 import com.ssafy.member.model.mapper.MemberMapper;
 import com.ssafy.member.model.mapper.MemberMapper;
 import com.ssafy.member.model.MemberDto;
 
+@Service
 public class MemberServiceImpl implements MemberService {
 
 	private MemberMapper memberMapper;

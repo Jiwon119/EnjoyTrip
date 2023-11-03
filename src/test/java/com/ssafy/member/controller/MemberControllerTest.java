@@ -1,8 +1,11 @@
-package com.ssafy.enjoyTrip;
+package com.ssafy.member.controller;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Disabled;
@@ -23,13 +26,13 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootTest(
 		properties = {
 			"spring.config.location=classpath:application.properties"
-		}
+		},
+		classes = {MemberControllerTest.class}
 	)
 @Slf4j
 @AutoConfigureMockMvc
 @ComponentScan(basePackages = {"com.ssafy"})
-class ApplicationTests {
-
+class MemberControllerTest {
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -44,21 +47,33 @@ class ApplicationTests {
 	private String userPwd;
 
 	@Test
-	@DisplayName("### 프로퍼티 읽기 테스트 ###")
-	void contextLoads() {
-		log.debug("##### 회원 목록 테스트 시작 #####");
+	void testMypage() throws Exception{
+		log.debug("##### 회원 정보 얻기 테스트 #####");
+		mockMvc.perform(get("/member/mypage/" + "ssafy"))
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+			.andExpect(jsonPath("$.userPwd", is(userPwd)))
+			.andDo(print());
+		log.debug("##### 회원 목록 테스트 종료 #####");
+	}
+
+	@Test
+	@Disabled
+	void testLogout() {
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	@Disabled
-	@DisplayName("##### 회원 목록 테스트 #####")
-	void testUserList() throws Exception {
-		
-		log.debug("##### 회원 목록 테스트 시작 #####");
-		mockMvc.perform(get("/admin/user"))
+	@DisplayName("##### 회원 정보 얻기 테스트 #####")
+	void testUserInfo() throws Exception {
+		log.debug("##### 회원 정보 얻기 테스트 #####");
+		mockMvc.perform(get("/admin/user/" + userId))
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+			.andExpect(jsonPath("$.userPwd", is(userPwd)))
 			.andDo(print());
 		log.debug("##### 회원 목록 테스트 종료 #####");
 	}
+
 }
