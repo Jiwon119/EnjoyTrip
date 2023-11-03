@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
 <mapper namespace="com.ssafy.attraction.model.mapper.AttractionMapper">
+
 	<resultMap type="attractionInfoDto" id="attraction">
 		<result column="content_id" property="contentId"/>
 		<result column="content_type_id" property="contentTypeId"/>
@@ -20,16 +22,16 @@
 		<result column="mlevel" property="mlevel"/>
 	</resultMap>
 
-
-	<select id="attractionList" parameterType="map" resultMap="attraction">
-		<!-- select content_id, content_type_id, title, addr1, addr2, zipcode, tel, first_image, first_image2, readcount, sido_code, gugun_code, latitude, longitude, mlevel
+	<select id="attractionList" resultMap="attraction">
+		<!-- select content_id, content_type_id, title, addr1, addr2, zipcode, tel, first_image, first_image2, readcount, sido_code, gugun_code, latitude, longitude, mlevel -->
+		select *
 		from attraction_info
-		<where>
+ 		<where>
             <if test="attractionInfoDto != null">
                 <if test="attractionInfoDto.sidoCode != 0">
                     sido_code = #{attractionInfoDto.sidoCode}
                     <if test="title != null and !title.isEmpty()">
-                        and title like '%' || #{title} || '%'
+                        and title like concat('%', #{title}, '%')
                     </if>
                 </if>
                 <if test="attractionInfoDto.contentTypeId != 0">
@@ -44,12 +46,10 @@
                 </if>
             </if>
             <if test="attractionInfoDto == null and (title != null and !title.isEmpty())">
-                where title like '%' || #{title} || '%'
+                where title like concat('%', #{title}, '%')
             </if>
         </where>
-        order by content_id limit 100 -->
+        order by content_id limit 100
 	</select>
-	
-	<select id="searchByTitle"></select>
 
 </mapper>
