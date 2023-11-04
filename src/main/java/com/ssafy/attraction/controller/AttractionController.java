@@ -1,19 +1,9 @@
 package com.ssafy.attraction.controller;
 
 import java.util.List;
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,9 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.attraction.model.AttractionInfoDto;
 import com.ssafy.attraction.model.service.AttractionService;
-import com.ssafy.attraction.model.service.AttractionServiceImpl;
-import com.ssafy.member.model.MemberDto;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 

@@ -4,8 +4,14 @@
 <mapper namespace="com.ssafy.board.model.mapper.BoardMapper">
 	<insert id="writeArticle"></insert>
 	
-	<select id="listArticle"></select>
-	<select id="getTotalArticleCount"></select>
+	<select id="listArticle" resultType="BoardDto">
+		select article_no, user_id, subject, content, hit, register_time 
+		from board
+	</select>
+	<select id="getTotalArticleCount" resultType="Integer">
+		select count(*)
+		from board
+	</select>
 	<select id="getArticle"></select>
 	<update id="updateHit"></update>
 	<update id="modifyArticle"></update>

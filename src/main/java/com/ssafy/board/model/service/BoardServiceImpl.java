@@ -12,7 +12,10 @@ import com.ssafy.board.model.mapper.BoardMapper;
 import com.ssafy.util.PageNavigation;
 import com.ssafy.util.SizeConstant;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class BoardServiceImpl implements BoardService {
 	
 	private BoardMapper boardMapper;
@@ -40,6 +43,8 @@ public class BoardServiceImpl implements BoardService {
 		int start = pgno * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE;
 		param.put("start", start);
 		param.put("listsize", SizeConstant.LIST_SIZE);
+		
+		log.debug("param : {}", param);
 		return boardMapper.listArticle(param);
 	}
 	

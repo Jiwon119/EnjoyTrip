@@ -1,20 +1,18 @@
 package com.ssafy.board.controller;
 
-import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.board.model.BoardDto;
@@ -24,6 +22,8 @@ import com.ssafy.util.PageNavigation;
 import com.ssafy.util.ParameterCheck;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("/article")
@@ -44,8 +44,108 @@ public class BoardController {
 	}
 
 	
-	////////////////////////////////////////////////////////////////
+	@ApiOperation(value = "article", notes = "게시글 목록을 반환해줍니다.")
+	@PostMapping("/list")
+	public ResponseEntity<?> list(
+			@RequestParam(value = "loginUser", required = false) MemberDto loginUser,
+			@RequestParam(value = "type", required = false) String type,
+			@RequestParam(value = "pgno", required = false) String ParamPgno,
+			@RequestParam(value = "key", required = false) String ParamKey,
+			@RequestParam(value = "word", required = false) String ParamWord) {
+		
+		pgno = ParameterCheck.notNumberToOne(ParamPgno);
+		key = ParameterCheck.nullToBlank(ParamKey);
+		word = ParameterCheck.nullToBlank(ParamWord);
+		
+		Map<String, Object> responseData = new HashMap<>();
+		
+//		if (loginUser != null) {
+			try {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("pgno", pgno + "");
+				map.put("key", key);
+				map.put("word", word);
+				
+				List<BoardDto> list = boardService.listArticle(map);
+				int n = list.size();
+				
+				String sort = type;
+				
+				if(sort != null) {
+					if(sort.equals("sort")) {
+						//reverse Insertion Sort
+						for(int i = 1; i < n; i++) {
+							BoardDto key = list.get(i);
+							int j = i - 1;
+							while(0 <= j && list.get(j).getHit() < key.getHit()) {
+								list.set(j+1, list.get(j));
+								j--;
+							}
+							list.set(j+1, key);
+						}
+					}
+				}
+				
+				responseData.put("articles", list);
+				
+				PageNavigation pageNavigation = boardService.makePageNavigation(map);
+				responseData.put("navigation", pageNavigation);
+				
+				return new ResponseEntity<Map<String, Object>>(responseData, HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return exceptionHandling(e); 
+			}
+//		}
+
+	}
 	
+	@ApiOperation(value = "article", notes = "게시글 목록을 반환해줍니다.")
+	@PostMapping("/view")
+	private  ResponseEntity<?> view(
+			@RequestParam(value = "loginUser", required = false) MemberDto loginUser,
+			@RequestParam(value = "articleno", required = false) int articleNo
+			) {
+
+//		if (loginUser != null) {
+			try {
+				BoardDto boardDto = boardService.getArticle(articleNo);
+				boardService.updateHit(articleNo);
+
+				return new ResponseEntity<>(boardDto, HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return exceptionHandling(e); 
+			}
+//		} else
+//			return "/user/login.jsp";
+	}
+	
+//	private String write() {
+//		HttpSession session = request.getSession();
+//		MemberDto memberDto = (MemberDto) session.getAttribute("login");
+//		if (memberDto != null) {
+//			BoardDto boardDto = new BoardDto();
+//			boardDto.setUserId(memberDto.getId());
+//			boardDto.setSubject(request.getParameter("subject"));
+//			boardDto.setContent(request.getParameter("content"));
+//			try {
+//				boardService.writeArticle(boardDto);
+//				return "/article?action=list";
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				request.setAttribute("msg", "글작성 중 문제 발생!!!");
+//				return "/error/error.jsp";
+//			}
+//		} else
+//			return "/user/login.jsp";
+//	}
+	
+	
+	private ResponseEntity<String> exceptionHandling(Exception e) {
+		e.printStackTrace();
+		return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 	
 //	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -99,70 +199,7 @@ public class BoardController {
 //		response.sendRedirect(request.getContextPath() + path);
 //	}
 //
-//	private String list(HttpServletRequest request, HttpServletResponse response) {
-//		HttpSession session = request.getSession();
-//		MemberDto memberDto = (MemberDto) session.getAttribute("login");
-//		if (memberDto != null) {
-//			try {
-//				Map<String, String> map = new HashMap<String, String>();
-//				map.put("pgno", pgno + "");
-//				map.put("key", key);
-//				map.put("word", word);
-//				
-//				List<BoardDto> list = boardService.listArticle(map);
-//				int n = list.size();
-//				String sort = request.getParameter("type");
-//				
-//				if(sort != null) {
-//					if(sort.equals("sort")) {
-//						//reverse Insertion Sort
-//						for(int i = 1; i < n; i++) {
-//							BoardDto key = list.get(i);
-//							int j = i - 1;
-//							while(0 <= j && list.get(j).getHit() < key.getHit()) {
-//								list.set(j+1, list.get(j));
-//								j--;
-//							}
-//							list.set(j+1, key);
-//						}
-//					}
-//				}
-//				System.out.println(list.size());
-//				request.setAttribute("articles", list);
-//				
-//				PageNavigation pageNavigation = boardService.makePageNavigation(map);
-//				request.setAttribute("navigation", pageNavigation);
-//
-//				return "/board/list.jsp?" + queryStrig;
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//				request.setAttribute("msg", "글목록 출력 중 문제 발생!!!");
-//				return "/error/error.jsp";
-//			}
-//		} else
-//			return "/user/login.jsp";
-//	}
-//
-//	private String view(HttpServletRequest request, HttpServletResponse response) {
-//		HttpSession session = request.getSession();
-//		MemberDto memberDto = (MemberDto) session.getAttribute("login");
-//		if (memberDto != null) {
-//			int articleNo = Integer.parseInt(request.getParameter("articleno"));
-//			try {
-//				BoardDto boardDto = boardService.getArticle(articleNo);
-//				boardService.updateHit(articleNo);
-//				request.setAttribute("article", boardDto);
-//
-//				return "/board/view.jsp";
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//				request.setAttribute("msg", "글내용 출력 중 문제 발생!!!");
-//				return "/error/error.jsp";
-//			}
-//		} else
-//			return "/user/login.jsp";
-//	}
-//
+//	
 //	private String write(HttpServletRequest request, HttpServletResponse response) {
 //		HttpSession session = request.getSession();
 //		MemberDto memberDto = (MemberDto) session.getAttribute("login");
