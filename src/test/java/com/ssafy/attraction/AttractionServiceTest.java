@@ -31,6 +31,7 @@ public class AttractionServiceTest {
 	@Test
 	@DisplayName("##### 지도 Attraction 목록 #####")
 	void mapLoads() {
+		//Test
 		log.debug("##### 지도 Attraction 목록 시작 #####");
 		AttractionInfoDto attractionInfoDto = new AttractionInfoDto();
 		List<AttractionInfoDto> list = attractionService.attractionList(attractionInfoDto, "강남");
