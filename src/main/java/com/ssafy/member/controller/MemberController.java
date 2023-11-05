@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -120,7 +121,7 @@ public class MemberController {
 	}
 	
 	@ApiOperation(value = "updateMember", notes = "회원 정보 수정")
-	@PostMapping("/updateMember")
+	@PutMapping("/updateMember")
 	private ResponseEntity<?> updateMember(MemberDto member)
 			throws Exception {
 		Map<String , Object> map = new HashMap<String, Object>();
