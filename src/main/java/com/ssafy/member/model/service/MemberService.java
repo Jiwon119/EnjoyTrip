@@ -12,7 +12,7 @@ public interface MemberService {
 	
 	MemberDto update(MemberDto member);
 	
-	int delete(String id);
+	MemberDto delete(String id);
 	
 	MemberDto searchPass(String id, String email);
 	

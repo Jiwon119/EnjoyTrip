@@ -23,54 +23,28 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberDto regist(MemberDto member) {
-		System.out.println("service"+member);
-		memberMapper.insertMember(member);
-		return null;
+		return memberMapper.regist(member);
 	}
 
 	@Override
 	public MemberDto login(String id, String password) {
-		MemberDto member = memberMapper.login(id);
-		if (BCrypt.checkpw(password, member.getPassword())) {
-			System.out.println("service"+member);
-			return member;
-		}
-		else {
-			return null;
-		}
+		return memberMapper.login(id, password);
 	}
 
 	@Override
-	public MemberDto update(MemberDto member) {
-		int result = memberMapper.updateMember(member);
-		if(result==1) {
-			System.out.println("service"+member);
-//			MemberDto updateMember = memberMapper.selectMember(member.getId()); //한번 더 찾아주기
-//			return updateMember;
-		}
-		else {
-			return null;
-		}
-		return null;
+	public MemberDto selectMember(String id) {
+		return memberMapper.selectMember(id);
 	}
 	
-	public MemberDto modify(MemberDto member) {
-		int result = memberMapper.updateMember(member);
-		if(result==1) {
-			System.out.println("service"+member);
-//			MemberDto updateMember = memberMapper.selectMember(member.getId()); //한번 더 찾아주기
-//			return updateMember;
-		}
-		else {
-			return null;
-		}
-		return null;
+	@Override
+	public MemberDto update(MemberDto member) {
+		return memberMapper.updateMember(member);
 	}
+	
 
 	@Override
-	public int delete(String id) {
-		int result = memberMapper.deleteMember(id);
-		return result;
+	public MemberDto delete(String id) {
+		return memberMapper.deleteMember(id);
 	}
 
 	@Override
@@ -79,11 +53,6 @@ public class MemberServiceImpl implements MemberService {
 		return member;
 	}
 
-	@Override
-	public MemberDto selectMember(String id) {
-		log.debug("memberid : {}",id);
-		
-		return memberMapper.selectMember(id);
-	}
+
 
 }

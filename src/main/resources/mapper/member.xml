@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.member.model.mapper.MemberMapper">
+
+	<resultMap type="MemberDto" id="member">
+		<result column="user_id" property="id"/>
+		<result column="user_password" property="password"/>
+		<result column="user_email" property="email"/>
+		<result column="user_name" property="name"/> 
+		<result column="user_birth" property="birth"/>
+		<result column="user_phone" property="phone"/>
+		<result column="join_date" property="joinDate"/>
+	</resultMap>
+
+	<insert id="regist" parameterType="MemberDto">
+		insert into member (user_id, user_password, user_email, user_name, user_birth, user_phone, join_date)
+		values (#{id}, #{password}, #{email}, #{name}, #{birth}, #{phone}, now())
+	</insert>
+
+	<select id="login" parameterType="map" resultMap="member">
+		select *
+		from member
+		where user_id = #{id} and user_password=#{password}
+	</select>
+	
+	<select id="selectMember" parameterType="String" resultMap="member">
+		select * from member
+		where user_id=#{id}
+	</select>
+	
+	<update id="updateMember">
+		update members
+		<trim prefix="set" suffixOverrides=",">
+			<if test="userPwd != null">user_password = #{userPwd},</if>
+			<if test="emailId != null">email_id = #{emailId},</if>
+			<if test="emailDomain != null">email_domain = #{emailDomain},</if>
+		</trim>
+		where user_id = #{userId}
+	</update>
+
+	<delete id="deleteMember" parameterType="String">
+		delete from member
+		where user_id=#{id}
+	</delete>
+
+	<select id="searchPass"></select>
+
+
+
+</mapper>

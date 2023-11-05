@@ -1,15 +1,25 @@
 package com.ssafy.member.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.attraction.model.AttractionInfoDto;
 import com.ssafy.member.model.MemberDto;
 import com.ssafy.member.model.service.MemberService;
 import com.ssafy.util.DBUtil;
@@ -30,6 +40,7 @@ public class MemberController {
 		this.memberService = memberService;
 	}
 	
+	
 //	@GetMapping("/mypage")
 //	private String mypage(HttpSession session, @PathVariable("userid") String id) {
 //		MemberDto member = memberService.myPage(id);
@@ -39,14 +50,54 @@ public class MemberController {
 //		return "member/mypage";
 //	}
 
-	@ApiOperation(value = "mypage", notes = "유저 정보 페이지")
-	@GetMapping("/mypage/{userid}")
-	public String mypage(HttpSession session, @PathVariable("userid") String id) {
-		MemberDto member = memberService.selectMember(id);
-		session.setAttribute("mypage", member);
-
-		return "member/mypage";
+	@ApiOperation(value = "regist", notes = "회원가입")
+	@PostMapping("/regist")
+	protected ResponseEntity<?> regist(MemberDto member) throws Exception {
+		Map<String , String> map = new HashMap<String, String>();
+		memberService.regist(member);
+		map.put("msg", "회원가입 성공");
+		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
+	
+	@ApiOperation(value = "login", notes = "로그인")
+	@PostMapping("/login")
+	protected ResponseEntity<?> login(
+			HttpSession session,
+			@RequestParam("id") String id,
+			@RequestParam("password") String password
+			) throws Exception {
+		Map<String , String> map = new HashMap<String, String>();
+		MemberDto member = memberService.login(id, password);
+		if(member != null) {
+			map.put("msg", "로그인 성공");
+			session.setAttribute("loginUser", member);
+		}else {
+			map.put("msg", "로그인 실패");		
+		}
+		return new ResponseEntity<>(map, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "mypage", notes = "유저 정보 페이지")
+	@GetMapping("/mypage/{userId}")
+	public ResponseEntity<?> mypage(@PathVariable("userId") String id) throws Exception {
+		MemberDto member = memberService.selectMember(id);
+		return new ResponseEntity<>(member, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "deleteMember", notes = "유저 탈퇴")
+	@DeleteMapping("/delete/{userId}")
+	protected ResponseEntity<?> deleteMember( 
+			HttpSession session ,
+			@PathVariable("userId") String id) throws Exception {
+		Map<String , String> map = new HashMap<String, String>();
+
+		memberService.delete(id);
+		map.put("msg", "회원 탈퇴 성공");
+		session.invalidate();
+		
+		return new ResponseEntity<>(map, HttpStatus.OK); 
+	}
+	
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
@@ -166,38 +217,7 @@ public class MemberController {
 //		return 0;
 //	}
 //	
-//	protected void login(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		HttpSession session = request.getSession();
-//		String id = request.getParameter("id");
-//		String password = request.getParameter("password");
-//		//password = BCrypt.hashpw(password, BCrypt.gensalt());
-//		MemberDto member = memberService.login(id, password); //멤버서비스에가서 처리함
-//		System.out.print(password);
-//		session.setAttribute("login",member); //로그인성공 시
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("/");
-//		dispatcher.forward(request, response);
-//		
-//	}
-//	
-//	protected void regist(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		String id = request.getParameter("id");
-//		String password = request.getParameter("password");
-//		// 해시코드 추가
-//		password = BCrypt.hashpw(password, BCrypt.gensalt());
-//		int age = Integer.parseInt(request.getParameter("age"));
-//		String email = request.getParameter("email");
-//		String address = request.getParameter("address");
-//		
-//		MemberDto member = new MemberDto(id,password,age,email,address);
-//		
-//		memberService.regist(member); //멤버서비스에가서 처리함1
-//		System.out.print(member);
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("/");
-//		dispatcher.forward(request, response);
-//	}
-//	
+
 //	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 //			throws ServletException, IOException {
 //		HttpSession session = request.getSession();
