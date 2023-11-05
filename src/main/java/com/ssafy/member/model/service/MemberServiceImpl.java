@@ -1,5 +1,7 @@
 package com.ssafy.member.model.service;
 
+import java.util.List;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDto regist(MemberDto member) {
+	public int regist(MemberDto member) {
 		return memberMapper.regist(member);
 	}
 
@@ -33,24 +35,28 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberDto selectMember(String id) {
-		return memberMapper.selectMember(id);
+		return memberMapper.selectMember(id, null, null);
 	}
 	
 	@Override
-	public MemberDto update(MemberDto member) {
+	public int updateMember(MemberDto member) {
 		return memberMapper.updateMember(member);
 	}
 	
 
 	@Override
-	public MemberDto delete(String id) {
+	public int deleteMember(String id) {
 		return memberMapper.deleteMember(id);
 	}
 
 	@Override
-	public MemberDto searchPass(String id, String email) {
-		MemberDto member = memberMapper.searchPass(id, email);
-		return member;
+	public MemberDto searchPass(String id, String email, String name) {
+		return memberMapper.selectMember(id, email, name);
+	}
+
+	@Override
+	public List<MemberDto> selectAllMember() {
+		return memberMapper.selectAllMember();
 	}
 
 

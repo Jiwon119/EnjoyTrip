@@ -24,28 +24,36 @@
 		where user_id = #{id} and user_password=#{password}
 	</select>
 	
-	<select id="selectMember" parameterType="String" resultMap="member">
+	<select id="selectAllMember" resultMap="member">
 		select * from member
-		where user_id=#{id}
 	</select>
 	
-	<update id="updateMember">
-		update members
+	<select id="selectMember" parameterType="map" resultMap="member">
+		select * from member
+		where user_id=#{id}
+			<trim prefix="and" suffixOverrides="and">
+				<if test="eamil != null">user_email = #{eamil}</if>
+				<if test="name != null">and user_name = #{name}</if>
+			</trim>
+	</select>
+	
+	<update id="updateMember" parameterType="map">
+		update member
 		<trim prefix="set" suffixOverrides=",">
-			<if test="userPwd != null">user_password = #{userPwd},</if>
-			<if test="emailId != null">email_id = #{emailId},</if>
-			<if test="emailDomain != null">email_domain = #{emailDomain},</if>
+			<if test="password != null">user_password = #{password},</if>
+			<if test="email != null">user_email = #{email},</if>
+			<if test="name != null">user_name = #{name},</if>
+			<if test="birth != null">user_birth = #{birth},</if>
+			<if test="phone != null">user_phone = #{phone},</if>
 		</trim>
-		where user_id = #{userId}
+		where user_id = #{id}
 	</update>
+	
 
 	<delete id="deleteMember" parameterType="String">
 		delete from member
 		where user_id=#{id}
 	</delete>
-
-	<select id="searchPass"></select>
-
 
 
 </mapper>
