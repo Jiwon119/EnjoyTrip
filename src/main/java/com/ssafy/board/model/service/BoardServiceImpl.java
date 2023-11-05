@@ -35,8 +35,8 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDto> listArticle(Map<String, String> map) throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
 		String key = map.get("key");
-//		if("userid".equals(key))
-//			key = "user_id";
+		if("userid".equals(key))
+			key = "user_id";
 		param.put("key", key.isEmpty() ? "" : key);
 		param.put("word", map.get("word").isEmpty() ? "" : map.get("word"));
 		int pgno = Integer.parseInt(map.get("pgno"));
