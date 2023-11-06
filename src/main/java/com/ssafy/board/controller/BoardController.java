@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -100,9 +102,9 @@ public class BoardController {
 	}
 	
 	@ApiOperation(value = "article", notes = "게시글 번호로 검색")
-	@PostMapping("/view")
+	@GetMapping("/view/{articleNo}")
 	protected ResponseEntity<?> view(
-			@RequestParam(value = "articleNo", required = false) int articleNo
+			@PathVariable(value = "articleNo") int articleNo
 			) throws Exception {
 				Map<String, Object> responseData = new HashMap<>();
 				BoardDto boardDto = boardService.getArticle(articleNo);
@@ -126,7 +128,6 @@ public class BoardController {
 		return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	
 	
 //	@ApiOperation(value = "article", notes = "수정하고자하는 글번호 반환")
 //	@PostMapping("/mvModify")
@@ -171,10 +172,9 @@ public class BoardController {
 	}
 	
 	@ApiOperation(value = "article", notes = "글 삭제하기")
-	@DeleteMapping("/remove")
+	@DeleteMapping("/remove/{articleNo}")
 	private ResponseEntity<?> delete(
-			@RequestParam(value = "loginUser", required = false) MemberDto loginUser,
-			@RequestParam(value = "articleNo", required = false) int articleNo) throws Exception {
+			@PathVariable(value = "articleNo") int articleNo) throws Exception {
 			Map<String , String> map = new HashMap<String, String>();
 			boardService.deleteArticle(articleNo);
 			return new ResponseEntity<>(map, HttpStatus.OK); 
