@@ -102,7 +102,6 @@ public class BoardController {
 	@ApiOperation(value = "article", notes = "게시글 번호로 검색")
 	@PostMapping("/view")
 	protected ResponseEntity<?> view(
-			@RequestParam(value = "loginUser", required = false) MemberDto loginUser,
 			@RequestParam(value = "articleNo", required = false) int articleNo
 			) throws Exception {
 				Map<String, Object> responseData = new HashMap<>();
@@ -156,8 +155,16 @@ public class BoardController {
 	
 	@ApiOperation(value = "article", notes = "글 수정하기")
 	@PutMapping("/modify")
-	private ResponseEntity<?> modify(BoardDto board) throws Exception {
+	private ResponseEntity<?> modify(
+			@RequestParam(value = "articleNo") int articleNo,
+			@RequestParam(value = "subject", required = false) String subject,
+			@RequestParam(value = "content", required = false) String content
+			) throws Exception {
 		Map<String , Object> map = new HashMap<String, Object>();
+		BoardDto board = new BoardDto();
+		board.setArticleNo(articleNo);
+		board.setSubject(subject);
+		board.setContent(content);
 		boardService.modifyArticle(board);
 		map.put("msg", "글 수정 성공");
 		return new ResponseEntity<>(map, HttpStatus.OK); 

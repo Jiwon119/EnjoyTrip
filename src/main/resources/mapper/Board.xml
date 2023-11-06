@@ -4,45 +4,48 @@
 <mapper namespace="com.ssafy.board.model.mapper.BoardMapper">
 
 	<resultMap type="BoardDto" id="board">
-		<result column="article_no" property = "articleNo"/>
-		<result column="user_id" property = "userId"/>
-		<result column="subject" property = "subject"/>
-		<result column="content" property = "content"/>
-		<result column="hit" property = "hit"/>
-		<result column="register_time" property="registerTime"/>
+		<result column="article_no" property="articleNo" />
+		<result column="user_id" property="userId" />
+		<result column="subject" property="subject" />
+		<result column="content" property="content" />
+		<result column="hit" property="hit" />
+		<result column="register_time" property="registerTime" />
 	</resultMap>
 
 	<insert id="writeArticle" parameterType="BoardDto">
 		insert into board (user_id, subject, content)
 		values (#{userId}, #{subject}, #{content})
 	</insert>
-	
-	<select id="listArticle" resultType="BoardDto">
-		select article_no, user_id, subject, content, hit, register_time from board
+
+	<select id="listArticle" resultMap="board">
+		select article_no, user_id, subject, content, hit, register_time 
+		from board
 	</select>
 	<select id="getTotalArticleCount" resultType="Integer">
 		select count(*)
 		from board
 	</select>
-	<select id="getArticle" resultType="BoardDto">
-		select article_no, user_id, subject, content, hit, register_time 
+	<select id="getArticle" parameterType="Integer" resultMap="board">
+		select article_no, user_id, subject, content, hit,
+		register_time
 		from board
-		where subject = #{article_no}
+		where article_no = #{articleNo}
 	</select>
-	<update id="updateHit">
+	<update id="updateHit" parameterType="Integer">
 		update board
-	    set hit = hit + 1
-   		where article_no = #{articleNo}
+		set hit = hit + 1
+		where article_no = #{articleNo}
 	</update>
-	<update id="modifyArticle">
+	<update id="modifyArticle" parameterType="map">
 		update board
-    	set user_id = #{userId},
-        subject = #{subject},
-        content = #{content}
-    	where article_no = #{articleNo}
+		<trim prefix="set" suffixOverrides=",">
+			<if test="subject != null">subject = #{subject},</if>
+			<if test="content != null">content = #{content},</if>
+		</trim>
+		where article_no = #{articleNo}
 	</update>
 	<delete id="deleteArticle">
 		delete from board
-    	where article_no = #{articleNo}
+		where article_no = #{articleNo}
 	</delete>
 </mapper>
