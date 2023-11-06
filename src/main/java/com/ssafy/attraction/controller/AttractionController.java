@@ -37,7 +37,7 @@ public class AttractionController {
 	
 	@ApiOperation(value = "map", notes = "지도의 <big>검색 결과</big>을 반환해 줍니다.")
 	@PostMapping("/mapSearch")
-	public ResponseEntity<?> search(@RequestParam(value = "area", required = false) String area,
+	public ResponseEntity<List<AttractionInfoDto>> search(@RequestParam(value = "area", required = false) String area,
 			@RequestParam(value = "type", required = false) String type,
 			@RequestParam(value = "keyword", required = false) String keyword) {
 

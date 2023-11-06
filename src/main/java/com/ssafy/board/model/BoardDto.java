@@ -2,30 +2,33 @@ package com.ssafy.board.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@ApiModel(value = "BoardDto (게시판 정보)")
 public class BoardDto {
 
-	@JsonProperty("article_no")
+	@ApiModelProperty(value = "게시글 번호", example = "0")
 	private int articleNo;
 	
-	@JsonProperty("user_id")
+	@ApiModelProperty(value = "게시글 유저")
 	private String userId;
 	
-	@JsonProperty("subject")
+	@ApiModelProperty(value = "게시글 제목")
 	private String subject;
 	
-	@JsonProperty("content")
+	@ApiModelProperty(value = "게시글 내용")
 	private String content;
 	
-	@JsonProperty("hit")
+	@ApiModelProperty(value = "조회수", example = "0")
 	private int hit;
 	
-	@JsonProperty("register_time")
+	@ApiModelProperty(value = "등록 시간")
 	private String registerTime;
 
 }

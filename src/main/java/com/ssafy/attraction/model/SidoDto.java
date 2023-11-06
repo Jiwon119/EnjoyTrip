@@ -1,29 +1,13 @@
 package com.ssafy.attraction.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor // 디폴트 생성자 생성
 public class SidoDto {
 
 	private int sidoCode;
 	private String sidoName;
-
-	public int getSidoCode() {
-		return sidoCode;
-	}
-
-	public void setSidoCode(int sidoCode) {
-		this.sidoCode = sidoCode;
-	}
-
-	public String getSidoName() {
-		return sidoName;
-	}
-
-	public void setSidoName(String sidoName) {
-		this.sidoName = sidoName;
-	}
-
-	@Override
-	public String toString() {
-		return "SidoDto [sidoCode=" + sidoCode + ", sidoName=" + sidoName + "]";
-	}
 
 }

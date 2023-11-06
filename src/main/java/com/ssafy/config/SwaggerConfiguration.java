@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RestController;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -32,7 +33,7 @@ public class SwaggerConfiguration {
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).consumes(getConsumeContentTypes()).produces(getProduceContentTypes())
 					.apiInfo(apiInfo()).groupName(version).select()
-					.apis(RequestHandlerSelectors.any())
+					.apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
 					.build()
 					.useDefaultResponseMessages(false);
 	}
@@ -40,7 +41,7 @@ public class SwaggerConfiguration {
 	private Set<String> getConsumeContentTypes() {
         Set<String> consumes = new HashSet<>();
         consumes.add("application/json;charset=UTF-8");
-//      consumes.add("application/xml;charset=UTF-8");
+//        consumes.add("application/xml;charset=UTF-8");
         consumes.add("application/x-www-form-urlencoded");
         return consumes;
     }

@@ -106,12 +106,12 @@ public class BoardController {
 	protected ResponseEntity<?> view(
 			@PathVariable(value = "articleNo") int articleNo
 			) throws Exception {
-				Map<String, Object> responseData = new HashMap<>();
+				Map<String, BoardDto> responseData = new HashMap<>();
 				BoardDto boardDto = boardService.getArticle(articleNo);
 				boardService.updateHit(articleNo);
 				responseData.put("article", boardDto);
 					
-				return new ResponseEntity<>(responseData, HttpStatus.OK);
+				return new ResponseEntity<Map<String, BoardDto>>(responseData, HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "article", notes = "게시글을 작성합니다.")
@@ -156,19 +156,19 @@ public class BoardController {
 	
 	@ApiOperation(value = "article", notes = "글 수정하기")
 	@PutMapping("/modify")
-	private ResponseEntity<?> modify(
+	private ResponseEntity<BoardDto> modify(
 			@RequestParam(value = "articleNo") int articleNo,
 			@RequestParam(value = "subject", required = false) String subject,
 			@RequestParam(value = "content", required = false) String content
 			) throws Exception {
-		Map<String , Object> map = new HashMap<String, Object>();
+		Map<String , BoardDto> map = new HashMap<String, BoardDto>();
 		BoardDto board = new BoardDto();
 		board.setArticleNo(articleNo);
 		board.setSubject(subject);
 		board.setContent(content);
 		boardService.modifyArticle(board);
-		map.put("msg", "글 수정 성공");
-		return new ResponseEntity<>(map, HttpStatus.OK); 
+//		map.put("msg", "글 수정 성공");
+		return new ResponseEntity<BoardDto>(board, HttpStatus.OK); 
 	}
 	
 	@ApiOperation(value = "article", notes = "글 삭제하기")

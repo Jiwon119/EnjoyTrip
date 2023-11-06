@@ -66,9 +66,9 @@ public class MemberController {
 	
 	@ApiOperation(value = "mypage", notes = "유저 정보 페이지")
 	@GetMapping("/mypage/{userId}")
-	public ResponseEntity<?> mypage(@PathVariable("userId") String id) throws Exception {
+	public ResponseEntity<MemberDto> mypage(@PathVariable("userId") String id) throws Exception {
 		MemberDto member = memberService.selectMember(id);
-		return new ResponseEntity<>(member, HttpStatus.OK);
+		return new ResponseEntity<MemberDto>(member, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "deleteMember", notes = "유저 탈퇴")
