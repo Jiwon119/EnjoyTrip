@@ -26,6 +26,10 @@
 
 ✔ **Board Controller API**
 ![Board_Controller](/uploads/6dc1533b643adca0541f5edd2cb1aca7/Board_Controller.PNG)
+- **/article/write**  :  게시글을 작성합니다.
+![image](/uploads/74fa903f03cad687583c67e3bfcf5265/image.png)
+![image](/uploads/35b910731177fdcf0eb4abd8d4eb5ec5/image.png)
+
 
 ✔ **Member Controller API**
 ![image](/uploads/b2c72ef2469166edab98b8a36b5b5e14/image.png)
