@@ -16,11 +16,11 @@
   
 ![Attraction_Controller](/uploads/ba7dabccb9abed45e874b188041f3c9c/Attraction_Controller.PNG)
 
-- /map/mapList  :  지도의 전체 목록을 반환해 줍니다.
+- **/map/mapList**  :  지도의 전체 목록을 반환해 줍니다.
 ![image](/uploads/fafa2e4a619dc6c8a7815977a26b6b47/image.png)
 ![image](/uploads/0eb021ef178d44f77422e860448a234b/image.png)
 
-- /map/mapSearch  :  지도의 검색 결과을 반환해 줍니다.
+- **/map/mapSearch**  :  지도의 검색 결과을 반환해 줍니다.
 ![image](/uploads/207e7d3a3f523aa1cb4d02f266299149/image.png)
 ![image](/uploads/9e2414d4b5f2fb228f2532bcab87079a/image.png)
 
