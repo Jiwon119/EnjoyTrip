@@ -118,5 +118,24 @@
 
 ![image](/uploads/916e97600ddc793fae259c7f86297ddd/image.png)
 
+## JUnit Test
+- AttractionServiceTest
+    - 지도 검색 기능이 잘 작동하는가?
+
+    ![image](/uploads/a4297cef55196320df83742f511214e1/image.png)
+
+    - 전체 목록 중 100여 개의 list 반환
+
+    ![image](/uploads/44d1fae9f3aacb33bdb48655d8c80e4f/image.png)
+
+- MemberControllerTest
+    - 회원 정보 얻기 테스트
+
+    ![image](/uploads/f7f036ec372afd8cc0c1e417107f0c39/image.png)
+
+- MemberServiceImplTest
+    - MemberService 테스트
+    ![image](/uploads/e1abb2814ff09df02a52b281bd43c34a/image.png)
+
 ## 레퍼런스
 - https://stackoverflow.com/questions/62578308/swagger-ui-not-displaying-models
