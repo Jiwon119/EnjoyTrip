@@ -10,10 +10,25 @@
 - **게시판 관리** - 게시글 목록, 검색
 
 ## swagger
-✔ **Attraction Controller API**
+![swagger](/uploads/c53d253b91df5cc020f3aef0ec881149/swagger.PNG)
+
+✔ **Attraction Controller API**  
+  
+![Attraction_Controller](/uploads/ba7dabccb9abed45e874b188041f3c9c/Attraction_Controller.PNG)
+
+- /map/mapList  :  지도의 전체 목록을 반환해 줍니다.
+![image](/uploads/fafa2e4a619dc6c8a7815977a26b6b47/image.png)
+![image](/uploads/0eb021ef178d44f77422e860448a234b/image.png)
+
+- /map/mapSearch  :  지도의 검색 결과을 반환해 줍니다.
+![image](/uploads/207e7d3a3f523aa1cb4d02f266299149/image.png)
+![image](/uploads/9e2414d4b5f2fb228f2532bcab87079a/image.png)
 
 ✔ **Board Controller API**
+![Board_Controller](/uploads/6dc1533b643adca0541f5edd2cb1aca7/Board_Controller.PNG)
 
 ✔ **Member Controller API**
+![image](/uploads/b2c72ef2469166edab98b8a36b5b5e14/image.png)
 
 ✔ **Models**
+![image](/uploads/438d36d3b5403a4fa276a2d4dd7ac528/image.png)
