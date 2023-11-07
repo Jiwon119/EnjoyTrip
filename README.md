@@ -29,6 +29,7 @@
 - **/article/write**  :  게시글을 작성합니다.
 ![image](/uploads/74fa903f03cad687583c67e3bfcf5265/image.png)
 ![image](/uploads/35b910731177fdcf0eb4abd8d4eb5ec5/image.png)
+![image](/uploads/4dfd898dd9e06960dfbbb36583001424/image.png)
 
 
 ✔ **Member Controller API**
