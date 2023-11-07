@@ -35,6 +35,7 @@
 ![image](/uploads/9b4542477d54cda645c29909fba26bf6/image.png)
   
 - **/article/write**  :  게시글을 작성합니다.
+
 ![image](/uploads/74fa903f03cad687583c67e3bfcf5265/image.png)
 ![image](/uploads/35b910731177fdcf0eb4abd8d4eb5ec5/image.png)
 ![image](/uploads/4dfd898dd9e06960dfbbb36583001424/image.png)
@@ -54,6 +55,7 @@
 ![image](/uploads/c153b051aff874d8406defb0f691abc0/image.png)
   
 - **/article/write**  :  게시글을 작성합니다.
+
 ![image](/uploads/f58960a8ecfbf17267b0c819b52f48a4/image.png)
 ![image](/uploads/68e81bcc1fcd3b2b0320fa3d23a0867d/image.png)
 ![image](/uploads/d3c98283f2023edcd9937c9113ebb19c/image.png)
@@ -61,6 +63,7 @@
 ---
 
 ✔ **Member Controller API**
+
 ![image](/uploads/b2c72ef2469166edab98b8a36b5b5e14/image.png)
 
 - **/member/delete/{userId}**  :  회원탈퇴
