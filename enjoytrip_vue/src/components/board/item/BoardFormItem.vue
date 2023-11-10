@@ -1,6 +1,5 @@
 <script setup>
-import { registArticle } from "@/api/board";
-import axios from "axios";
+import { registArticle, getModifyArticle, modifyArticle, detailArticle } from "@/api/board";
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
@@ -26,6 +25,16 @@ if (props.type === "modify") {
   console.log(articleno + "번글 얻어와서 수정할거야");
   // API 호출
   isUseId.value = true;
+
+  detailArticle(articleno, ({ data }) => {
+    console.log(data);
+    article.value = data.article;
+    console.log(data)
+   }, 
+   (error) =>{
+    console.log(error);
+   })
+  console.log(article)
 }
 
 const subjectErrMsg = ref("");
@@ -52,7 +61,6 @@ watch(
 );
 
 function onSubmit() {
-  // event.preventDefault();
 
   if (subjectErrMsg.value) {
     alert(subjectErrMsg.value);
@@ -66,20 +74,25 @@ function onSubmit() {
 
 function writeArticle() {
   console.log("글등록하자!!", article.value);
-   // API 호출
-  //  registArticle(article.value, ({data}) => {
-  //   articles.value = data.articles
-  //   currentPage.value = data.currentPage;
-  //   totalPage.value = data.totalPageCount;
-  //  }, 
-  //  (error) =>{
-  //   console.log(error);
-  //  })
+  registArticle(article.value, (response) => {
+    console.log(response);
+   }, 
+   (error) =>{
+    console.log(error);
+   })
+   moveList();
 }
 
 function updateArticle() {
   console.log(article.value.articleNo + "번글 수정하자!!", article.value);
    // API 호출
+   modifyArticle(article.value, (response) => {
+    console.log(article.value);
+   }, 
+   (error) =>{
+    console.log(error);
+   })
+   moveList();
 }
 
 function moveList() {

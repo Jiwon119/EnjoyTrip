@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { detailArticle } from "@/api/board";
+import { detailArticle, deleteArticle } from "@/api/board";
 
 const route = useRoute();
 const router = useRouter();
@@ -20,13 +20,9 @@ const getArticle = () => {
   console.log(articleno + "번글 얻으러 가자!!!");
    // API 호출
    detailArticle(articleno, ({ data }) => {
-
-    article.value = data;
+    console.log(data);
+    article.value = data.article;
     console.log(data)
-
-    // articles.value = data.articles
-    // currentPage.value = data.currentPage;
-    // totalPage.value = data.totalPageCount;
    }, 
    (error) =>{
     console.log(error);
@@ -42,9 +38,15 @@ function moveModify() {
 }
 
 function onDeleteArticle() {
-  // const { articleno } = route.params;
   console.log(articleno + "번글 삭제하러 가자!!!");
    // API 호출
+   deleteArticle(articleno, ({ data }) => {
+    console.log(data);
+   }, 
+   (error) =>{
+    console.log(error);
+   })
+   router.push({ name: "article-list" });
 }
 </script>
 
