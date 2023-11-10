@@ -115,7 +115,7 @@
 	<insert id="writeComment" parameterType="commentDto">
 		insert into board_comment (article_no, parent_comment_no, content, writer, create_date)
 		values (#{articleNo}, #{parentCommentNo}, #{content}, #{writer}, now())
-		<selectKey resultType="int" keyProperty="comment_no" order="AFTER">
+		<selectKey resultType="int" keyProperty="commentNo" order="AFTER">
 			select last_insert_id()
 		</selectKey>
 	</insert>
