@@ -10,6 +10,7 @@ const router = useRouter();
 const { articleno } = route.params;
 
 const article = ref({});
+const comment = ref([]);
 
 onMounted(() => {
   getArticle();
@@ -21,8 +22,9 @@ const getArticle = () => {
    // API 호출
    detailArticle(articleno, ({ data }) => {
 
-    article.value = data;
-    console.log(data)
+    article.value = data.article;
+    comment.value = data.comment;
+    console.log("data",data)
 
     // articles.value = data.articles
     // currentPage.value = data.currentPage;
@@ -76,7 +78,7 @@ function onDeleteArticle() {
               </p>
             </div>
           </div>
-          <div class="col-md-4 align-self-center text-end">댓글 : 17</div>
+          <div class="col-md-4 align-self-center text-end">댓글 : {{ comment.length }}</div>
           <div class="divider mb-3"></div>
           <div class="text-secondary">
             {{ article.content }}
@@ -92,6 +94,9 @@ function onDeleteArticle() {
             <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="onDeleteArticle">
               글삭제
             </button>
+          </div>
+          <div v-for="co in comment" :key="co.commentNo">
+            <div>댓글 : {{ co.content }}</div>
           </div>
         </div>
       </div>
