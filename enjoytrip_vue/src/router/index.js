@@ -42,6 +42,11 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: "/estations",
+      name: "estations",
+      component: () => import("@/views/TheElectricChargingStation.vue")
+    }
   ],
 });
 

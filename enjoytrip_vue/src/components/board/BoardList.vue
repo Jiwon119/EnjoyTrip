@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { listArticle } from "@/api/board";
 
 import VSelect from "@/components/common/VSelect.vue";
 import BoardListItem from "@/components/board/item/BoardListItem.vue";
@@ -38,6 +39,16 @@ const changeKey = (val) => {
 const getArticleList = () => {
   console.log("서버에서 글목록 얻어오자!!!", param.value);
    // API 호출
+   listArticle(param.value, ({ data }) => {
+    console.log(data)
+
+    articles.value = data.articles
+    currentPage.value = data.currentPage;
+    totalPage.value = data.totalPageCount;
+   }, 
+   (error) =>{
+    console.log(error);
+   })
 };
 
 const onPageChange = (val) => {

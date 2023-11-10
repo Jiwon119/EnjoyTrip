@@ -13,4 +13,15 @@ function localAxios() {
   return instance;
 }
 
-export { localAxios };
+// public data vue api axios instance
+function publicDataAxios() {
+  const instance = axios.create({
+    baseURL: VITE_VUE_API_URL,
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  });
+  return instance;
+}
+
+export { localAxios, publicDataAxios };
