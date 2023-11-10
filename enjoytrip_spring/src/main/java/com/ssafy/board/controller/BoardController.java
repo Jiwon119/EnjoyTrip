@@ -56,7 +56,7 @@ public class BoardController {
 	@ApiOperation(value = "article", notes = "게시글 목록을 반환해줍니다.")
 //	@ApiResponses({ @ApiResponse(code = 200, message = "회원목록 OK!!"), @ApiResponse(code = 404, message = "페이지없어!!"),
 //		@ApiResponse(code = 500, message = "서버에러!!") })
-	@PostMapping("/list")
+	@GetMapping("/list")
 	public ResponseEntity<?> listArticle(
 			@RequestParam @ApiParam(value = "게시글을 얻기위한 부가정보.", required = true) Map<String, String> map) {
 		log.info("listArticle map - {}", map);
