@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { detailArticle } from "@/api/board";
 
 const route = useRoute();
 const router = useRouter();
@@ -18,6 +19,18 @@ const getArticle = () => {
   // const { articleno } = route.params;
   console.log(articleno + "번글 얻으러 가자!!!");
    // API 호출
+   detailArticle(articleno, ({ data }) => {
+
+    article.value = data;
+    console.log(data)
+
+    // articles.value = data.articles
+    // currentPage.value = data.currentPage;
+    // totalPage.value = data.totalPageCount;
+   }, 
+   (error) =>{
+    console.log(error);
+   })
 };
 
 function moveList() {
@@ -45,7 +58,8 @@ function onDeleteArticle() {
       </div>
       <div class="col-lg-10 text-start">
         <div class="row my-2">
-          <h2 class="text-secondary px-5">{{ article.articleNo }}. {{ article.subject }}</h2>
+          <!-- <h2 class="text-secondary px-5">{{ article.articleNo }}. {{ article.subject }}</h2> -->
+          <h2 class="text-secondary px-5">{{ article.subject }}</h2>
         </div>
         <div class="row">
           <div class="col-md-8">
@@ -55,7 +69,7 @@ function onDeleteArticle() {
                 src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg"
               />
               <p>
-                <span class="fw-bold">안효인</span> <br />
+                <span class="fw-bold">{{ article.userName }}</span> <br />
                 <span class="text-secondary fw-light">
                   {{ article.registerTime }}1 조회 : {{ article.hit }}
                 </span>
