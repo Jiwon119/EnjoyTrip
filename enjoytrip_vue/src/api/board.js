@@ -4,10 +4,10 @@ import { localAxios } from "@/util/http-commons";
 // local은 localAxios의 객체를 받음
 const local = localAxios();
 
-const url = "/board";
+const url = "/article";
 
 function listArticle(param, success, fail) {
-  local.get(`${url}`, { params: param }).then(success).catch(fail);
+  local.get(`${url}/list`, { params: param }).then(success).catch(fail);
 }
 
 function detailArticle(articleno, success, fail) {
@@ -31,6 +31,10 @@ function deleteArticle(articleno, success, fail) {
   local.delete(`${url}/${articleno}`).then(success).catch(fail);
 }
 
+function writeComment(comment, success, fail) {
+  local.post(`${url}/comment`, JSON.stringify(comment)).then(success).catch(fail);
+}
+
 export {
   listArticle,
   detailArticle,
@@ -38,4 +42,5 @@ export {
   getModifyArticle,
   modifyArticle,
   deleteArticle,
+  writeComment,
 };

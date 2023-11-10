@@ -1,4 +1,6 @@
 <script setup>
+import { registArticle } from "@/api/board";
+import axios from "axios";
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
@@ -61,9 +63,18 @@ function onSubmit() {
   }
 }
 
+
 function writeArticle() {
   console.log("글등록하자!!", article.value);
    // API 호출
+  //  registArticle(article.value, ({data}) => {
+  //   articles.value = data.articles
+  //   currentPage.value = data.currentPage;
+  //   totalPage.value = data.totalPageCount;
+  //  }, 
+  //  (error) =>{
+  //   console.log(error);
+  //  })
 }
 
 function updateArticle() {
@@ -97,10 +108,10 @@ function moveList() {
       <textarea class="form-control" v-model="article.content" rows="10"></textarea>
     </div>
     <div class="col-auto text-center">
-      <button type="submit" class="btn btn-outline-primary mb-3" v-if="type === 'regist'">
+      <button type="submit" class="btn btn-outline-primary mb-3" v-if="type === 'regist'" @click="writeArticle">
         글작성
       </button>
-      <button type="submit" class="btn btn-outline-success mb-3" v-else>글수정</button>
+      <button type="submit" class="btn btn-outline-success mb-3" v-else @click="updateArticle">글수정</button>
       <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="moveList">
         목록으로이동...
       </button>
