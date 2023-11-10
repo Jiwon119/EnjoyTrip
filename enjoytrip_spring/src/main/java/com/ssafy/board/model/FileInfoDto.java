@@ -19,34 +19,4 @@ public class FileInfoDto {
 	@ApiModelProperty(value = "저장 파일이름")
 	private String saveFile;
 
-	public String getSaveFolder() {
-		return saveFolder;
-	}
-
-	public void setSaveFolder(String saveFolder) {
-		this.saveFolder = saveFolder;
-	}
-
-	public String getOriginalFile() {
-		return originalFile;
-	}
-
-	public void setOriginalFile(String originalFile) {
-		this.originalFile = originalFile;
-	}
-
-	public String getSaveFile() {
-		return saveFile;
-	}
-
-	public void setSaveFile(String saveFile) {
-		this.saveFile = saveFile;
-	}
-
-	@Override
-	public String toString() {
-		return "FileInfoDto [saveFolder=" + saveFolder + ", originalFile=" + originalFile + ", saveFile=" + saveFile
-				+ "]";
-	}
-
 }

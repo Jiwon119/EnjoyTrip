@@ -9,8 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommentDto {
 
-	private List<BoardDto> articles;
-	private int currentPage;
-	private int totalPageCount;
+	private int articleNo;
+	private int commentNo;
+	private int parentCommentNo;
+	private String content;
+	private String writer;
+	private String createDate;
 
 }

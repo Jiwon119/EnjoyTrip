@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.board.model.BoardDto;
 import com.ssafy.board.model.BoardListDto;
+import com.ssafy.board.model.CommentDto;
 import com.ssafy.board.model.FileInfoDto;
 import com.ssafy.board.model.mapper.BoardMapper;
 
@@ -86,6 +87,18 @@ public class BoardServiceImpl implements BoardService {
 	public void deleteArticle(int articleNo) throws Exception {
 		// TODO : BoardDaoImpl의 deleteArticle 호출
 		boardMapper.deleteArticle(articleNo);
+	}
+
+
+	@Override
+	public void writeComment(CommentDto commentDto) throws Exception {
+		boardMapper.writeComment(commentDto);
+	}
+
+
+	@Override
+	public List<CommentDto> getComment(int articleno) throws Exception {
+		return boardMapper.getComment(articleno);
 	}
 
 }

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.board.model.BoardDto;
 import com.ssafy.board.model.BoardListDto;
+import com.ssafy.board.model.CommentDto;
 import com.ssafy.board.model.service.BoardService;
 import com.ssafy.member.model.MemberDto;
 import com.ssafy.util.PageNavigation;
@@ -71,12 +72,17 @@ public class BoardController {
 	
 	@ApiOperation(value = "게시판 글보기", notes = "글번호에 해당하는 게시글의 정보를 반환한다.", response = BoardDto.class)
 	@GetMapping("/{articleno}")
-	public ResponseEntity<BoardDto> getArticle(
+	public ResponseEntity<?> getArticle(
 			@PathVariable("articleno") @ApiParam(value = "얻어올 글의 글번호.", required = true) int articleno)
 			throws Exception {
 		log.info("getArticle - 호출 : " + articleno);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("article", boardService.getArticle(articleno));
+		map.put("comment", boardService.getComment(articleno));
 		boardService.updateHit(articleno);
-		return new ResponseEntity<BoardDto>(boardService.getArticle(articleno), HttpStatus.OK);
+
+		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "게시판 글작성", notes = "새로운 게시글 정보를 입력한다.")
@@ -118,8 +124,22 @@ public class BoardController {
 		log.info("deleteArticle - 호출");
 		boardService.deleteArticle(articleno);
 		return ResponseEntity.ok().build();
-
 	}
+	
+	@ApiOperation(value = "게시판 글 댓글 작성", notes = "게시글에 댓글을 입력한다.")
+	@PostMapping("/comment")
+	public ResponseEntity<?> writeComment(
+			@RequestBody @ApiParam(value = "댓글 정보.", required = true) CommentDto commentDto) {
+		log.info("writeComment CommentDto - {}", commentDto);
+		try {
+			
+			boardService.writeComment(commentDto);
+			return new ResponseEntity<Void>(HttpStatus.CREATED);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+
 	
 	private ResponseEntity<String> exceptionHandling(Exception e) {
 		e.printStackTrace();
