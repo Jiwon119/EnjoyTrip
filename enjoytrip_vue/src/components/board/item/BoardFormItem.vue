@@ -30,10 +30,10 @@ if (props.type === "modify") {
     console.log(data);
     article.value = data.article;
     console.log(data)
-   }, 
-   (error) =>{
-    console.log(error);
-   })
+  },
+    (error) => {
+      console.log(error);
+    })
   console.log(article)
 }
 
@@ -76,23 +76,23 @@ function writeArticle() {
   console.log("글등록하자!!", article.value);
   registArticle(article.value, (response) => {
     console.log(response);
-   }, 
-   (error) =>{
-    console.log(error);
-   })
-   moveList();
+  },
+    (error) => {
+      console.log(error);
+    })
+  moveList();
 }
 
 function updateArticle() {
   console.log(article.value.articleNo + "번글 수정하자!!", article.value);
-   // API 호출
-   modifyArticle(article.value, (response) => {
+  // API 호출
+  modifyArticle(article.value, (response) => {
     console.log(article.value);
-   }, 
-   (error) =>{
-    console.log(error);
-   })
-   moveList();
+  },
+    (error) => {
+      console.log(error);
+    })
+  moveList();
 }
 
 function moveList() {
@@ -104,13 +104,7 @@ function moveList() {
   <form @submit.prevent="onSubmit">
     <div class="mb-3">
       <label for="userid" class="form-label">작성자 ID : </label>
-      <input
-        type="text"
-        class="form-control"
-        v-model="article.userId"
-        :disabled="isUseId"
-        placeholder="작성자ID..."
-      />
+      <input type="text" class="form-control" v-model="article.userId" :disabled="isUseId" placeholder="작성자ID..." />
     </div>
     <div class="mb-3">
       <label for="subject" class="form-label">제목 : </label>

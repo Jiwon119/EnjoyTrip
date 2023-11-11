@@ -38,17 +38,20 @@ const changeKey = (val) => {
 
 const getArticleList = () => {
   console.log("서버에서 글목록 얻어오자!!!", param.value);
-   // API 호출
-   listArticle(param.value, ({ data }) => {
-    console.log(data)
+  // API 호출
+  listArticle(
+    param.value,
+    ({ data }) => {
+      console.log(data);
 
-    articles.value = data.articles
-    currentPage.value = data.currentPage;
-    totalPage.value = data.totalPageCount;
-   }, 
-   (error) =>{
-    console.log(error);
-   })
+      articles.value = data.articles;
+      currentPage.value = data.currentPage;
+      totalPage.value = data.totalPageCount;
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
 };
 
 const onPageChange = (val) => {
@@ -67,14 +70,16 @@ const moveWrite = () => {
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10">
-        <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-          <mark class="sky">글목록</mark>
-        </h2>
+        <h2 class="my-3 py-3 text-center">글목록</h2>
       </div>
       <div class="col-lg-10">
         <div class="row align-self-center mb-2">
           <div class="col-md-2 text-start">
-            <button type="button" class="btn btn-outline-primary btn-sm" @click="moveWrite">
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm"
+              @click="moveWrite"
+            >
               글쓰기
             </button>
           </div>
@@ -88,7 +93,13 @@ const moveWrite = () => {
                   v-model="param.word"
                   placeholder="검색어..."
                 />
-                <button class="btn btn-dark" type="button" @click="getArticleList">검색</button>
+                <button
+                  class="btn btn-dark"
+                  type="button"
+                  @click="getArticleList"
+                >
+                  검색
+                </button>
               </div>
             </form>
           </div>
