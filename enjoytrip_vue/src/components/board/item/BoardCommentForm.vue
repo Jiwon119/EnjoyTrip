@@ -1,9 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import { writeComment } from "@/api/board";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 
-const router = useRouter();
 const route = useRoute();
 
 let { articleno } = route.params;
@@ -14,15 +13,19 @@ const newComment = ref({
   writer: ""
 })
 
-function writeArticle() {
+const emit = defineEmits(["commentWrite"]);
+
+function writeNewComment() {
   console.log(newComment.value, "새로운 댓글 추가");
   // API 호출
   writeComment(newComment.value, (response) => {
     console.log(response);
+    emit("commentWrite")
   },
     (error) => {
       console.log(error);
     })
+  newComment.value.content = ""
 }
 
 </script>
@@ -31,7 +34,7 @@ function writeArticle() {
   <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="아이디" v-model="newComment.writer"> <br />
     <input type="text" class="form-control" placeholder="댓글 입력" v-model="newComment.content">
-    <button class="btn btn-outline-secondary" type="button" @click="writeArticle">등록</button>
+    <button class="btn btn-outline-secondary" type="button" @click="writeNewComment">등록</button>
   </div>
 </template>
 

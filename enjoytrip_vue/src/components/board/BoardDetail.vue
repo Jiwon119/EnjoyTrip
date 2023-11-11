@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { detailArticle, deleteArticle } from "@/api/board";
+import { detailArticle, deleteArticle, getComment } from "@/api/board";
 import BoardComment from "./item/BoardComment.vue";
 import BoardCommentForm from "./item/BoardCommentForm.vue";
 
@@ -50,6 +50,16 @@ function onDeleteArticle() {
     })
   router.push({ name: "article-list" });
 }
+
+function newComment() {
+  getComment(articleno, ({ data }) => {
+    console.log(data);
+    comments.value.push(data[data.length - 1])
+  },
+    (error) => {
+      console.log(error);
+    })
+}
 </script>
 
 <template>
@@ -91,9 +101,8 @@ function onDeleteArticle() {
           </div>
 
 
-          <BoardCommentForm :articleno="articleno" />
+          <BoardCommentForm @comment-write="newComment" />
           <BoardComment v-for="comment in comments" :key="comment.commentNo" :comment="comment" />
-
 
         </div>
       </div>

@@ -32,7 +32,14 @@ function deleteArticle(articleno, success, fail) {
 }
 
 function writeComment(comment, success, fail) {
-  local.post(`${url}/comment`, JSON.stringify(comment)).then(success).catch(fail);
+  local
+    .post(`${url}/comment`, JSON.stringify(comment))
+    .then(success)
+    .catch(fail);
+}
+
+function getComment(comment, success, fail) {
+  local.get(`${url}/comment/${comment}`).then(success).catch(fail);
 }
 
 export {
@@ -43,4 +50,5 @@ export {
   modifyArticle,
   deleteArticle,
   writeComment,
+  getComment,
 };

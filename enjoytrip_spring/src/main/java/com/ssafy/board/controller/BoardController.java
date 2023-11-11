@@ -1,6 +1,7 @@
 package com.ssafy.board.controller;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,7 +121,7 @@ public class BoardController {
 	
 	@ApiOperation(value = "게시판 글삭제", notes = "글번호에 해당하는 게시글의 정보를 삭제한다. 그리고 DB삭제 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
 	@DeleteMapping("/{articleno}")
-	public ResponseEntity<String> deleteArticle(@PathVariable("articleno") @ApiParam(value = "살제할 글의 글번호.", required = true) int articleno) throws Exception {
+	public ResponseEntity<String> deleteArticle(@PathVariable("articleno") @ApiParam(value = "삭제할 글의 글번호.", required = true) int articleno) throws Exception {
 		log.info("deleteArticle - 호출");
 		boardService.deleteArticle(articleno);
 		return ResponseEntity.ok().build();
@@ -135,6 +136,20 @@ public class BoardController {
 			
 			boardService.writeComment(commentDto);
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	@ApiOperation(value = "게시판 글 댓글 얻기", notes = "게시글에 댓글 정보를 반환한다.")
+	@GetMapping("/comment/{articleno}")
+	public ResponseEntity<?> getComment(
+			@PathVariable("articleno") @ApiParam(value = "댓글을 얻어올 글 번호.", required = true) int articleno) {
+		log.info("getComment articleno - {}", articleno);
+		try {
+			List<CommentDto> comment = boardService.getComment(articleno);
+			
+			return new ResponseEntity<List<CommentDto>>(comment, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
