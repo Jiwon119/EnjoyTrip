@@ -1,5 +1,5 @@
 <script setup>
-import { registArticle, getModifyArticle, modifyArticle, detailArticle } from "@/api/board";
+import { registArticle, modifyArticle, detailArticle } from "@/api/board";
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
@@ -86,7 +86,7 @@ function writeArticle() {
 function updateArticle() {
   console.log(article.value.articleNo + "번글 수정하자!!", article.value);
   // API 호출
-  modifyArticle(article.value, (response) => {
+  modifyArticle(article.value, () => {
     console.log(article.value);
   },
     (error) => {

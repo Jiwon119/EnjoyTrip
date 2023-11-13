@@ -38,8 +38,8 @@ function writeComment(comment, success, fail) {
     .catch(fail);
 }
 
-function getComment(comment, success, fail) {
-  local.get(`${url}/comment/${comment}`).then(success).catch(fail);
+function getComment(articleno, success, fail) {
+  local.get(`${url}/comment/${articleno}`).then(success).catch(fail);
 }
 
 export {

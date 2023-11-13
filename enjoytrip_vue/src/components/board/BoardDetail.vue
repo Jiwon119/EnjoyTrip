@@ -1,9 +1,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { detailArticle, deleteArticle, getComment } from "@/api/board";
+import { detailArticle, deleteArticle } from "@/api/board";
 import BoardComment from "./item/BoardComment.vue";
-import BoardCommentForm from "./item/BoardCommentForm.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -19,7 +18,6 @@ onMounted(() => {
 });
 
 const getArticle = () => {
-  // const { articleno } = route.params;
   console.log(articleno + "번글 얻으러 가자!!!");
   // API 호출
   detailArticle(articleno, ({ data }) => {
@@ -51,15 +49,6 @@ function onDeleteArticle() {
   router.push({ name: "article-list" });
 }
 
-function newComment() {
-  getComment(articleno, ({ data }) => {
-    console.log(data);
-    comments.value.push(data[data.length - 1])
-  },
-    (error) => {
-      console.log(error);
-    })
-}
 </script>
 
 <template>
@@ -100,9 +89,7 @@ function newComment() {
             </button>
           </div>
 
-
-          <BoardCommentForm @comment-write="newComment" />
-          <BoardComment v-for="comment in comments" :key="comment.commentNo" :comment="comment" />
+          <BoardComment />
 
         </div>
       </div>
