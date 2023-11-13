@@ -14,3 +14,20 @@
     - 나만의 여행 계획 페이지 (팀별 아이디어)
 - 심화 기능
     - Hotplace 관련 페이지 (팀별 아이디어)
+## 추가사항
+
+- 댓글 / 파일 테이블 추가
+
+![image](/uploads/f31312e25be6b6d01096cef71d7259da/image.png)
+
+- Comment, FileInfo Dto
+
+![image](/uploads/b26607b26f3a8ba55c3e58244d586917/image.png)
+
+- BoardMapper
+
+![image](/uploads/643eef2ef5f23b8b249096eaefcadd17/image.png)
+
+- BoardService
+
+![image](/uploads/7574df6c9d3e96dc0d66285eb2634bf5/image.png)
