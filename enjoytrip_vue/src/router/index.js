@@ -50,7 +50,12 @@ const router = createRouter({
     {
       path: "/camp",
       name: "camp",
-      component: () => import("@/views/TheCapming.vue")
+      component: () => import("@/views/TheCapmingView.vue")
+    },
+    {
+      path: "/user",
+      name: "user",
+      component: () => import("@/views/TheUserView.vue")
     }
   ],
 });
