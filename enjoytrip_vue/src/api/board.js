@@ -14,9 +14,9 @@ function detailArticle(articleno, success, fail) {
   local.get(`${url}/${articleno}`).then(success).catch(fail);
 }
 
-function registArticle(article, success, fail) {
+function registArticle(article, upfile, success, fail) {
   console.log("boardjs article", article);
-  local.post(`${url}`, JSON.stringify(article)).then(success).catch(fail);
+  local.post(`${url}`, JSON.stringify(article),JSON.stringify(upfile)).then(success).catch(fail);
 }
 
 function getModifyArticle(articleno, success, fail) {

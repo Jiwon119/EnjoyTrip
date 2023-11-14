@@ -1,13 +1,18 @@
 package com.ssafy.board.controller;
 
+import java.io.File;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,10 +28,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.board.model.BoardDto;
 import com.ssafy.board.model.BoardListDto;
 import com.ssafy.board.model.CommentDto;
+import com.ssafy.board.model.FileInfoDto;
 import com.ssafy.board.model.service.BoardService;
 import com.ssafy.member.model.MemberDto;
 import com.ssafy.util.PageNavigation;
@@ -45,6 +52,15 @@ import springfox.documentation.annotations.ApiIgnore;
 @Slf4j
 @Api(tags = {"Board Controller  API V1"})
 public class BoardController {
+	
+	@Value("${file.path}")
+	private String uploadPath;
+	
+	@Value("${file.path.upload-images}")
+	private String uploadImagePath;
+	
+	@Value("${file.path.upload-files}")
+	private String uploadFilePath;
 
 	private BoardService boardService;
 
@@ -89,9 +105,38 @@ public class BoardController {
 	@ApiOperation(value = "게시판 글작성", notes = "새로운 게시글 정보를 입력한다.")
 	@PostMapping
 	public ResponseEntity<?> writeArticle(
-			@RequestBody @ApiParam(value = "게시글 정보.", required = true) BoardDto boardDto) {
+			@ApiParam(value = "게시글 정보.", required = true) BoardDto boardDto, 
+			@RequestParam("upfile") MultipartFile[] files) {
 		log.info("writeArticle boardDto - {}", boardDto);
 		try {
+//			FileUpload 관련 설정.
+			log.info("uploadPath : {}, uploadImagePath : {}, uploadFilePath : {}", uploadPath, uploadImagePath, uploadFilePath);
+			log.info("MultipartFile.isEmpty : {}", files[0].isEmpty());
+			if(!files[0].isEmpty()) {
+				String today = new SimpleDateFormat("yyMMdd").format(new Date());
+				String saveFolder = uploadPath + File.separator + today;
+				log.info("저장 폴더 : {}", saveFolder);
+				File folder = new File(saveFolder);
+				if (!folder.exists())
+					folder.mkdirs();
+				List<FileInfoDto> fileInfos = new ArrayList<FileInfoDto>();
+				for (MultipartFile mfile : files) {
+					FileInfoDto fileInfoDto = new FileInfoDto();
+					String originalFileName = mfile.getOriginalFilename();
+					if (!originalFileName.isEmpty()) {
+						String saveFileName = UUID.randomUUID().toString()
+								+ originalFileName.substring(originalFileName.lastIndexOf('.'));
+						fileInfoDto.setSaveFolder(today);
+						fileInfoDto.setOriginalFile(originalFileName);
+						fileInfoDto.setSaveFile(saveFileName);
+						log.info("원본 파일 이름 : {}, 실제 저장 파일 이름 : {}", mfile.getOriginalFilename(), saveFileName);
+						mfile.transferTo(new File(folder, saveFileName));
+					}
+					fileInfos.add(fileInfoDto);
+				}
+				boardDto.setFileInfos(fileInfos);
+			}
+			
 			boardService.writeArticle(boardDto);
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
 		} catch (Exception e) {

@@ -12,13 +12,16 @@ const isUseId = ref(false);
 
 const article = ref({
   articleNo: 0,
-  subject: "",
-  content: "",
-  userId: "",
+  subject: "1234",
+  content: "123",
+  userId: "ssafy",
   userName: "",
   hit: 0,
-  registerTime: "",
+  registerTime: ""
 });
+
+const upfile = ref();
+const image = ref();
 
 if (props.type === "modify") {
   let { articleno } = route.params;
@@ -74,7 +77,7 @@ function onSubmit() {
 
 function writeArticle() {
   console.log("글등록하자!!", article.value);
-  registArticle(article.value, (response) => {
+  registArticle(article.value, upfile, (response) => {
     console.log(response);
   },
     (error) => {
@@ -98,6 +101,14 @@ function updateArticle() {
 function moveList() {
   router.push({ name: "article-list" });
 }
+
+function upload() {
+     
+      console.log(this)
+      // this.imageUploaded = URL.createObjectURL(this.image)
+    }
+  
+
 </script>
 
 <template>
@@ -114,6 +125,12 @@ function moveList() {
       <label for="content" class="form-label">내용 : </label>
       <textarea class="form-control" v-model="article.content" rows="10"></textarea>
     </div>
+
+    <div class="mb-3">
+				<label for="upfile" class="form-label">파일:</label>
+				<input type="file" class="form-control border" @change="upload(this)" id="upfile" name="upfile" multiple="multiple">
+			</div>
+
     <div class="col-auto text-center">
       <button type="submit" class="btn btn-outline-primary mb-3" v-if="type === 'regist'" @click="writeArticle">
         글작성
