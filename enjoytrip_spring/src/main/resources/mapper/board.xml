@@ -126,5 +126,16 @@
 		where article_no=#{articleNo}
 	</select>
 	
+	<delete id="deleteComment" parameterType="int">
+		delete from board_comment
+		where comment_no = #{commentNo}
+	</delete>
+	
+	<update id="modifyComment" parameterType="commentDto">
+		update board_comment
+		set content = #{content}
+		where comment_no = #{commentNo}
+	</update>
+	
 
 </mapper>
