@@ -29,24 +29,22 @@
 
 ## Usecase Diagram
 ✔ **Member Usecase Diagram**  
-![회원](/uploads/6c5403531813a4fbf9dd633e633b92f9/회원.jpg)  
+![Member_Usecase_Diagram](https://github.com/Jiwon119/04_EnjoyTrip_Back/assets/92111247/e71820ce-6334-41fd-8ffd-2dadd1b00dff)
 
 ✔ **Board Usecase Diagram**  
-![여행_후기_게시판](/uploads/8d79f5706fb29a6e73bc41fd182b754b/여행_후기_게시판.jpg)  
+![Board_Usecase_Diagram](https://github.com/Jiwon119/04_EnjoyTrip_Back/assets/92111247/e868dbe0-2480-43d9-8fe7-91ec86082f5a)
 
 ✔ **EnjoyTrip Usecase Diagram**  
-![지도](/uploads/01bc298ad5759ee89cf2f7a664e1d9ad/지도.jpg)  
-
+![EnjoyTrip_Usecase_Diagram](https://github.com/Jiwon119/04_EnjoyTrip_Back/assets/92111247/b28de2d1-eca1-41ce-8485-f72385769e7c)
+  
 
 ## 1. 메인 화면
 ✔ **1-1. 로그인 전**  
 ![1 main](https://github.com/BBSSJJ/BOJ/assets/77558985/888f6dde-27c9-4827-a8f0-b2ca6a70dd73)
-
+  
 ✔ **1-1. 로그인 후**  
 ![1 main-login](https://github.com/BBSSJJ/BOJ/assets/77558985/a727b213-0320-493c-989e-3df478aa6d86)
-
-
-
+  
 
 ## 2. 로그인 관리
 ✔ **2-1. 회원가입**  
