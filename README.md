@@ -10,45 +10,46 @@
 ## 1. 관광지 조회
  
 ✔ **1-1. 지역, 컨텐츠 타입별 관광지 정보 검색**  
-![1-1](/uploads/f79def9605825d6d2bf6fbb043b62b95/1-1.PNG)  
+![1-1](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/0f5b7d52-5403-474b-b665-015289d857bb)  
   
 ✔ **1-2. 관광지 명으로 관광지 정보 검색**  
-![1-2](/uploads/d327cb75cf81d9b4419577c7d8c2f256/1-2.PNG)  
+![1-2](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/2fc1576b-2bc3-4555-a9f7-768f0b878e76)  
   
   
 ## 2. 회원 조회
 ✔ **user 테이블 구조**  
-![image2](/uploads/9eaa1d46074940631fd0a681f4daf136/image2.png)
+![image2](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/b1fd8436-7b28-45b4-aaa9-c4f7d9eac555)  
   
 ✔ **2-1. 회원가입, 아이디 중복 시 회원가입 실패**  
-![2-1](/uploads/6782f2a2bb43b5b3bca2d768384585db/2-1.PNG)  
-![2-1-1](/uploads/a7015534f17f278cc7fb11972eb40204/2-1-1.PNG)  
+![2-1](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/d6759d97-b313-44bb-a724-7ad80ea57886)  
+![2-1-1](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/ed95b8d5-6609-47e9-b8e4-d280e1d80cfe)  
   
 ✔ **2-2. 로그인, 성공 시 정보 조회**    
-![2-2](/uploads/1964be32ab68e7a4e4df37f57a7d2ba7/2-2.PNG)  
+![2-2](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/d8a3e08c-1028-4cc5-bd51-c4a4813cc951)  
   
 ✔ **2-3. 회원 정보 수정**    
-![2-3](/uploads/a1b3dcb21fd1311896a0f9c70de9ab6a/2-3.PNG)  
+![2-3](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/031e3cfc-b846-4696-b421-974042906500)  
   
 ✔ **2-4. 회원 삭제**  
-![2-4](/uploads/124a34077a2530ad0277cb4fb085bb43/2-4.PNG)  
+![2-4](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/fa2efcb4-9376-45af-8673-b2255f2eb639)
   
   
 ## 3. 게시판 조회
 ✔ **board 테이블 구조**  
-![image1](/uploads/bb1d80c4bfc350ba769270bb8c607efa/image1.png)  
+![image1](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/a214b0c0-48b1-4571-9687-584a9d0094ad)  
   
 ✔ **3-1. 게시글 등록, 전체 글 조회**  
-![3-1](/uploads/7abd2527ebca8048fc6578e99f5da0d0/3-1.PNG)  
+![3-1](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/b65dcbda-f27d-4c91-b073-b5cd5193c577)  
   
 ✔ **3-2. 제목으로 게시글 검색**  
-![3-2](/uploads/5836e4d4358ff4971ce3f0adf92945eb/3-2.PNG)  
+![3-2](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/4809e21d-bcd0-4a5f-8721-5143f7366014)  
   
 ✔ **3-3. 게시글 번호로 게시글 검색**  
-![3-3](/uploads/28a629f45dd0ebb3384ab3acaf335732/3-3.PNG)  
+![3-3](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/1b8577d5-efce-4412-bd07-018be400c460)  
   
 ✔ **3-4. 게시글 번호로 게시글 찾아 제목과 내용 수정**  
-![3-4](/uploads/67df1be54a93f545205dd90b6ceb5497/3-4.PNG)  
+![3-4](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/592e7b84-bdd3-421f-a758-6aa732a5bf41)  
   
 ✔ **3-5. 게시글 번호로 게시글 삭제**  
-![3-5](/uploads/c9f042d4ef11d44dab67406cb9dd0e62/3-5.PNG)  
+![3-5](https://github.com/Jiwon119/03_EnjoyTrip_DB/assets/92111247/7021c063-3706-4970-a6fd-0fc071700562)  
+  
