@@ -1,4 +1,4 @@
-# 02_EnjoyTrip_Front
+# EnjoyTrip_Front
 
 ## 요구사항
 - 지역별 관광지 정보 수집 - 한국관광공사 : 지역별 관광지 정보를 얻어와 화면에 표시
