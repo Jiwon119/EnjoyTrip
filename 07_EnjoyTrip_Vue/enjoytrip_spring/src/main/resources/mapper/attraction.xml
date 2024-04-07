@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ssafy.attraction.model.mapper.AttractionMapper">
+
+	<resultMap type="attractionInfoDto" id="attraction">
+		<result column="content_id" property="contentId"/>
+		<result column="content_type_id" property="contentTypeId"/>
+		<result column="title" property="title"/>
+		<result column="addr1" property="addr1"/>
+		<result column="addr2" property="addr2"/>
+		<result column="zipcode" property="zipcode"/>
+		<result column="tel" property="tel"/>
+		<result column="first_image" property="firstImage"/>
+		<result column="first_image2" property="firstImage2"/>
+		<result column="readcount" property="readcount"/>
+		<result column="sido_code" property="sidoCode"/>
+		<result column="gugun_code" property="gugunCode"/>
+		<result column="latitude" property="latitude"/>
+		<result column="longitude" property="longitude"/>
+		<result column="mlevel" property="mlevel"/>
+	</resultMap>
+
+	<select id="attractionList" resultMap="attraction">
+		<!-- select content_id, content_type_id, title, addr1, addr2, zipcode, tel, first_image, first_image2, readcount, sido_code, gugun_code, latitude, longitude, mlevel -->
+		select *
+		from attraction_info
+ 		<where>
+            <if test="attractionInfoDto != null">
+                <if test="attractionInfoDto.sidoCode != 0">
+                    sido_code = #{attractionInfoDto.sidoCode}
+                    <if test="title != null and !title.isEmpty()">
+                        and title like concat('%', #{title}, '%')
+                    </if>
+                </if>
+                <if test="attractionInfoDto.contentTypeId != 0">
+                    <choose>
+                        <when test="attractionInfoDto.sidoCode != 0">
+                            and content_type_id = #{attractionInfoDto.contentTypeId}
+                        </when>
+                        <otherwise>
+                            where content_type_id = #{attractionInfoDto.contentTypeId}
+                        </otherwise>
+                    </choose>
+                </if>
+            </if>
+            <if test="attractionInfoDto == null and (title != null and !title.isEmpty())">
+                where title like concat('%', #{title}, '%')
+            </if>
+        </where>
+        order by content_id limit 100
+	</select>
+
+</mapper>
